@@ -26,9 +26,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section - Minimal */}
-      <section className="relative border-b border-gray-800 pb-8 pt-20 sm:pb-10 sm:pt-24">
+      <section className="relative pb-8 pt-20 sm:pb-10 sm:pt-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +77,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
                     <label className="mb-2 block text-xs font-medium text-gray-400">
-                      Full Name <span className="text-blue-400">*</span>
+                      Full Name <span className="text-[#43b14b]">*</span>
                     </label>
                     <input
                       type="text"
@@ -87,13 +87,13 @@ export default function ContactPage() {
                       onChange={(e) =>
                         handleInputChange('fullName', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-800 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                       placeholder="Your full name"
                     />
                   </div>
                   <div>
                     <label className="mb-2 block text-xs font-medium text-gray-400">
-                      Email <span className="text-blue-400">*</span>
+                      Email <span className="text-[#43b14b]">*</span>
                     </label>
                     <input
                       type="email"
@@ -103,7 +103,7 @@ export default function ContactPage() {
                       onChange={(e) =>
                         handleInputChange('email', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-800 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -120,13 +120,13 @@ export default function ContactPage() {
                       onChange={(e) =>
                         handleInputChange('phoneNumber', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-800 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                       placeholder="+977 98XXXXXXXX"
                     />
                   </div>
                   <div>
                     <label className="mb-2 block text-xs font-medium text-gray-400">
-                      Subject <span className="text-blue-400">*</span>
+                      Subject <span className="text-[#43b14b]">*</span>
                     </label>
                     <input
                       type="text"
@@ -136,14 +136,14 @@ export default function ContactPage() {
                       onChange={(e) =>
                         handleInputChange('subject', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-800 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                       placeholder="What is this regarding?"
                     />
                   </div>
                 </div>
                 <div>
                   <label className="mb-2 block text-xs font-medium text-gray-400">
-                    Message <span className="text-blue-400">*</span>
+                    Message <span className="text-[#43b14b]">*</span>
                   </label>
                   <textarea
                     name="message"
@@ -153,13 +153,13 @@ export default function ContactPage() {
                     onChange={(e) =>
                       handleInputChange('message', e.target.value)
                     }
-                    className="w-full resize-none rounded-md border border-gray-800 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                    className="w-full resize-none rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                     placeholder="Tell us how we can help you..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-md bg-blue-600 px-8 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 sm:w-auto"
+                  className="w-full rounded-md bg-[#43b14b] px-8 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#3a9a41] sm:w-auto"
                 >
                   Submit
                 </button>
@@ -181,8 +181,8 @@ export default function ContactPage() {
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800 bg-gray-900">
-                      <Phone className="h-5 w-5 text-blue-400" />
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30">
+                      <Phone className="h-5 w-5 text-[#43b14b]" />
                     </div>
                     <div>
                       <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
@@ -190,15 +190,15 @@ export default function ContactPage() {
                       </p>
                       <a
                         href="tel:+9779709098343"
-                        className="text-sm text-white transition-colors hover:text-blue-400"
+                        className="text-sm text-white transition-colors hover:text-[#43b14b]"
                       >
                         +977 9709098343
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800 bg-gray-900">
-                      <Mail className="h-5 w-5 text-blue-400" />
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30">
+                      <Mail className="h-5 w-5 text-[#43b14b]" />
                     </div>
                     <div>
                       <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
@@ -206,15 +206,15 @@ export default function ContactPage() {
                       </p>
                       <a
                         href="mailto:info@nebulax.com"
-                        className="text-sm text-white transition-colors hover:text-blue-400"
+                        className="text-sm text-white transition-colors hover:text-[#43b14b]"
                       >
                         info@nebulax.com
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800 bg-gray-900">
-                      <Building2 className="h-5 w-5 text-blue-400" />
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30">
+                      <Building2 className="h-5 w-5 text-[#43b14b]" />
                     </div>
                     <div>
                       <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
@@ -224,8 +224,8 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800 bg-gray-900">
-                      <MapPin className="h-5 w-5 text-blue-400" />
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30">
+                      <MapPin className="h-5 w-5 text-[#43b14b]" />
                     </div>
                     <div>
                       <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
@@ -238,7 +238,7 @@ export default function ContactPage() {
               </div>
 
               {/* Department Contacts */}
-              <div className="border-t border-gray-800 pt-6">
+              <div className="pt-6">
                 <h3 className="mb-5 text-lg font-semibold text-white">
                   Department Contacts
                 </h3>
@@ -250,51 +250,51 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <a
                         href="tel:+9779709098343"
-                        className="block text-sm text-blue-400 transition-colors hover:text-blue-300"
+                        className="block text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
                       >
                         +977 9709098343
                       </a>
                       <a
                         href="mailto:sales@nebulax.com"
-                        className="block text-sm text-blue-400 transition-colors hover:text-blue-300"
+                        className="block text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
                       >
                         sales@nebulax.com
                       </a>
                     </div>
                   </div>
-                  <div className="border-t border-gray-800 pt-4">
+                  <div className="pt-4">
                     <p className="mb-3 text-sm font-medium text-white">
                       For Career
                     </p>
                     <div className="space-y-2">
                       <a
                         href="tel:+9779709098343"
-                        className="block text-sm text-blue-400 transition-colors hover:text-blue-300"
+                        className="block text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
                       >
                         +977 9709098343
                       </a>
                       <a
                         href="mailto:career@nebulax.com"
-                        className="block text-sm text-blue-400 transition-colors hover:text-blue-300"
+                        className="block text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
                       >
                         career@nebulax.com
                       </a>
                     </div>
                   </div>
-                  <div className="border-t border-gray-800 pt-4">
+                  <div className="pt-4">
                     <p className="mb-3 text-sm font-medium text-white">
                       For Support
                     </p>
                     <div className="space-y-2">
                       <a
                         href="tel:+9779709098343"
-                        className="block text-sm text-blue-400 transition-colors hover:text-blue-300"
+                        className="block text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
                       >
                         +977 9709098343
                       </a>
                       <a
                         href="mailto:info@nebulax.com"
-                        className="block text-sm text-blue-400 transition-colors hover:text-blue-300"
+                        className="block text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
                       >
                         info@nebulax.com
                       </a>
@@ -308,7 +308,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="border-t border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -323,7 +323,7 @@ export default function ContactPage() {
                 Visit our office in Rajbiraj
               </p>
             </div>
-            <div className="overflow-hidden rounded-lg border border-gray-800 bg-gray-900">
+            <div className="overflow-hidden rounded-lg border border-gray-800/50 bg-gray-900/30">
               <div className="h-[400px] w-full sm:h-[500px] lg:h-[600px]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.1234567890123!2d86.748611!3d26.539167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef4a3b3b3b3b3b%3A0x3b3b3b3b3b3b3b3b!2sRajbiraj%2C%20Nepal!5e0!3m2!1sen!2snp!4v1234567890123!5m2!1sen!2snp"
@@ -342,7 +342,7 @@ export default function ContactPage() {
                 href="https://www.google.com/maps/place/Rajbiraj,+Nepal"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-blue-400 transition-colors hover:text-blue-300"
+                className="inline-flex items-center gap-2 text-sm text-[#43b14b] transition-colors hover:text-[#4ade80]"
               >
                 View larger map
                 <ArrowRight className="h-4 w-4" />
@@ -353,7 +353,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-gray-800 py-16 sm:py-20 lg:py-24">
+      <section className="py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -371,7 +371,7 @@ export default function ContactPage() {
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href="tel:+9779709098343"
-                className="rounded-md bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                className="rounded-md bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Reach out now! +977 9709098343
               </a>

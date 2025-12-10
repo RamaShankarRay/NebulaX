@@ -48,7 +48,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex h-screen flex-col justify-center overflow-hidden bg-black">
+    <section className="relative flex h-screen flex-col justify-center overflow-hidden bg-[#1b1b1b]">
       {/* Video Background */}
       <div className="absolute inset-0 h-full w-full">
         <video
@@ -83,7 +83,7 @@ export function Hero() {
               <h1 className="text-4xl font-normal leading-[1.2] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
                 Elevate Your
                 <br />
-                <span className="text-blue-400">Digital Presence</span>
+                <span className="text-[#43b14b]">Digital Presence</span>
                 <br />
                 Today
               </h1>
@@ -101,7 +101,7 @@ export function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="rounded-lg bg-blue-600 px-8 py-6 text-base font-medium text-white transition-colors hover:bg-blue-500 sm:text-lg"
+                className="rounded-lg bg-[#43b14b] px-8 py-6 text-base font-medium text-white transition-colors hover:bg-[#3a9a41] sm:text-lg"
               >
                 <Link href="#contact" className="flex items-center gap-2">
                   Get Started

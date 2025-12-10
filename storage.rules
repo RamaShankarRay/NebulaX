@@ -1,17 +1,99 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // Users can upload to their own folder
-    match /users/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId;
+    // Helper function to check if user is authenticated (admin)
+    function isAuthenticated() {
+      return request.auth != null;
     }
     
-    // Public assets
+    // Services media uploads
+    match /services/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Portfolio media uploads (images and videos)
+    // Support both old format (portfolio/{fileName}) and new format (portfolio/{portfolioId}/{fileName})
+    match /portfolio/{allPaths=**} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Pricing media uploads
+    match /pricing/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Blogs media uploads
+    match /blogs/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Testimonials media uploads (avatars)
+    match /testimonials/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Partners media uploads (logos)
+    match /partners/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Team media uploads (avatars)
+    match /team/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Activities media uploads
+    match /activities/{fileName} {
+      allow read: if true; // Public read for published content
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Job Applications CV uploads
+    match /job-applications/{allPaths=**} {
+      allow read: if true; // Public read (for admins to view CVs)
+      allow write: if true; // Anyone can upload CVs when applying
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Settings media uploads (logo, favicon, OG image)
+    match /settings/{fileName} {
+      allow read: if true; // Public read
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // User uploads (if needed in future)
+    match /users/{userId}/{allPaths=**} {
+      allow read: if true; // Public read
+      allow write: if isAuthenticated() && request.auth.uid == userId; // Users can upload to their own folder
+      allow delete: if isAuthenticated() && request.auth.uid == userId; // Users can delete their own files
+    }
+    
+    // Public assets (if needed)
     match /public/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
+      allow read: if true; // Public read
+      allow write: if isAuthenticated(); // Only authenticated admins can upload
+      allow delete: if isAuthenticated(); // Only authenticated admins can delete
+    }
+    
+    // Default: deny all other access
+    match /{allPaths=**} {
+      allow read, write: if false;
     }
   }
 }
-

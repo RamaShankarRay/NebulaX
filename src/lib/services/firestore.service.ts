@@ -16,6 +16,21 @@ import {
 } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 
+/**
+ * Remove undefined values from an object (Firestore doesn't accept undefined)
+ */
+function removeUndefined<T extends Record<string, unknown>>(
+  obj: T
+): Partial<T> {
+  const cleaned: Partial<T> = {};
+  for (const key in obj) {
+    if (obj[key] !== undefined) {
+      cleaned[key] = obj[key];
+    }
+  }
+  return cleaned;
+}
+
 export class FirestoreService {
   /**
    * Get a single document by ID
@@ -70,8 +85,9 @@ export class FirestoreService {
         ? doc(db, collectionName, documentId)
         : doc(collection(db, collectionName));
 
+      const cleanedData = removeUndefined(data);
       await setDoc(docRef, {
-        ...data,
+        ...cleanedData,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
@@ -84,7 +100,7 @@ export class FirestoreService {
   }
 
   /**
-   * Update an existing document
+   * Update an existing document (or create if it doesn't exist)
    */
   static async updateDocument(
     collectionName: string,
@@ -93,10 +109,23 @@ export class FirestoreService {
   ): Promise<void> {
     try {
       const docRef = doc(db, collectionName, documentId);
-      await updateDoc(docRef, {
-        ...data,
-        updatedAt: serverTimestamp(),
-      });
+      const docSnap = await getDoc(docRef);
+      const cleanedData = removeUndefined(data);
+
+      if (docSnap.exists()) {
+        // Document exists, update it
+        await updateDoc(docRef, {
+          ...cleanedData,
+          updatedAt: serverTimestamp(),
+        });
+      } else {
+        // Document doesn't exist, create it with the provided ID
+        await setDoc(docRef, {
+          ...cleanedData,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        });
+      }
     } catch (error) {
       console.error(`Error updating document ${documentId}:`, error);
       throw error;

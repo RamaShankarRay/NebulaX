@@ -1,9 +1,15 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ChevronDown, Menu, X, Phone, ArrowRight } from 'lucide-react';
+import {
+  ChevronDown,
+  Menu,
+  X,
+  PhoneCall,
+  Send,
+  ArrowRight,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '@/components/ui/logo';
 import { useQuickEnquiry } from '@/contexts/quick-enquiry-context';
@@ -52,7 +58,7 @@ const dropdownContent = {
             title: 'App Development In Nepal',
             description:
               'Innovative and user-friendly mobile application designed to engage users.',
-            href: '/services/app-development-in-nepal',
+            href: '/services/app-development',
           },
           {
             title: 'System/Software Development',
@@ -131,14 +137,23 @@ const dropdownContent = {
 
 const MobileNavContent = ({
   setMobileMenuOpen,
+  isOpen,
 }: {
   setMobileMenuOpen: (open: boolean) => void;
+  isOpen: boolean;
 }) => {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set()
   );
 
-  const toggleSection = (section: string) => {
+  // Reset expanded sections when menu closes
+  useEffect(() => {
+    if (!isOpen) {
+      setExpandedSections(new Set());
+    }
+  }, [isOpen]);
+
+  const toggleSection = useCallback((section: string) => {
     setExpandedSections((prev) => {
       const next = new Set(prev);
       if (next.has(section)) {
@@ -148,7 +163,7 @@ const MobileNavContent = ({
       }
       return next;
     });
-  };
+  }, []);
 
   return (
     <div
@@ -162,7 +177,7 @@ const MobileNavContent = ({
         {/* Home */}
         <Link
           href="/"
-          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           onClick={() => setMobileMenuOpen(false)}
         >
           Home
@@ -172,7 +187,7 @@ const MobileNavContent = ({
         <div>
           <button
             onClick={() => toggleSection('about')}
-            className="flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+            className="flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           >
             <span>About</span>
             <ChevronDown
@@ -182,12 +197,12 @@ const MobileNavContent = ({
             />
           </button>
           {expandedSections.has('about') && (
-            <div className="ml-4 mt-1 space-y-0.5 border-l border-gray-800 pl-4">
+            <div className="ml-4 mt-1 space-y-0.5 border-l border-gray-800/50 pl-4">
               {dropdownContent.about.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
-                  className="block rounded-md px-4 py-2.5 text-sm font-normal text-gray-300 transition-colors hover:bg-gray-800 hover:text-blue-400"
+                  className="block rounded-md px-4 py-2.5 text-sm font-normal text-gray-300 transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <div className="mb-1 font-medium text-white">
@@ -206,7 +221,7 @@ const MobileNavContent = ({
         <div>
           <button
             onClick={() => toggleSection('service')}
-            className="flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+            className="flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           >
             <span>Service</span>
             <ChevronDown
@@ -216,7 +231,7 @@ const MobileNavContent = ({
             />
           </button>
           {expandedSections.has('service') && (
-            <div className="ml-4 mt-1 space-y-3 border-l border-gray-800 pl-4">
+            <div className="ml-4 mt-1 space-y-3 border-l border-gray-800/50 pl-4">
               {dropdownContent.service.categories.map(
                 (category, categoryIndex) => (
                   <div key={categoryIndex}>
@@ -233,7 +248,7 @@ const MobileNavContent = ({
                         <Link
                           key={serviceIndex}
                           href={service.href}
-                          className="block rounded-md px-4 py-2.5 text-sm font-normal text-gray-300 transition-colors hover:bg-gray-800 hover:text-blue-400"
+                          className="block rounded-md px-4 py-2.5 text-sm font-normal text-gray-300 transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <div className="mb-1 font-medium text-white">
@@ -247,15 +262,15 @@ const MobileNavContent = ({
                     </div>
                     {categoryIndex <
                       dropdownContent.service.categories.length - 1 && (
-                      <div className="mx-4 my-3 h-px bg-gray-800" />
+                      <div className="mx-4 my-3 h-px bg-gray-800/50" />
                     )}
                   </div>
                 )
               )}
-              <div className="mt-2 border-t border-gray-800 pt-2">
+              <div className="mt-2 border-t border-gray-800/50 pt-2">
                 <Link
                   href="/services"
-                  className="block flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
+                  className="block flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium text-[#43b14b] transition-colors hover:text-[#4ade80]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   See All Services
@@ -270,7 +285,7 @@ const MobileNavContent = ({
         <div>
           <button
             onClick={() => toggleSection('pricing')}
-            className="flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+            className="flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           >
             <span>Pricing</span>
             <ChevronDown
@@ -280,12 +295,12 @@ const MobileNavContent = ({
             />
           </button>
           {expandedSections.has('pricing') && (
-            <div className="ml-4 mt-1 space-y-0.5 border-l border-gray-800 pl-4">
+            <div className="ml-4 mt-1 space-y-0.5 border-l border-gray-800/50 pl-4">
               {dropdownContent.pricing.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
-                  className="block rounded-md px-4 py-2.5 text-sm font-normal text-gray-300 transition-colors hover:bg-gray-800 hover:text-blue-400"
+                  className="block rounded-md px-4 py-2.5 text-sm font-normal text-gray-300 transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <div className="mb-1 font-semibold text-white">
@@ -296,10 +311,10 @@ const MobileNavContent = ({
                   </div>
                 </Link>
               ))}
-              <div className="mt-2 border-t border-gray-800 pt-2">
+              <div className="mt-2 border-t border-gray-800/50 pt-2">
                 <Link
                   href="/pricing"
-                  className="block flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
+                  className="block flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium text-[#43b14b] transition-colors hover:text-[#4ade80]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   See All Pricing
@@ -313,7 +328,7 @@ const MobileNavContent = ({
         {/* Our Work */}
         <Link
           href="/portfolio"
-          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           onClick={() => setMobileMenuOpen(false)}
         >
           Our Work
@@ -322,7 +337,7 @@ const MobileNavContent = ({
         {/* Career */}
         <Link
           href="/career"
-          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           onClick={() => setMobileMenuOpen(false)}
         >
           Career
@@ -331,7 +346,7 @@ const MobileNavContent = ({
         {/* Contact */}
         <Link
           href="/contact"
-          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-blue-400"
+          className="block rounded-md px-4 py-3 text-base font-normal text-white transition-colors hover:bg-gray-800 hover:text-[#43b14b]"
           onClick={() => setMobileMenuOpen(false)}
         >
           Contact
@@ -355,6 +370,7 @@ const NavbarContent = ({
   const serviceDropdownRef = useRef<HTMLDivElement>(null);
   const pricingDropdownRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -366,9 +382,21 @@ const NavbarContent = ({
         setActiveDropdown(null);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+
+    // Only add listener if a dropdown is open
+    if (activeDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [activeDropdown]);
+
+  // Close dropdown when mobile menu opens
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      setActiveDropdown(null);
+    }
+  }, [mobileMenuOpen]);
 
   return (
     <>
@@ -392,7 +420,7 @@ const NavbarContent = ({
               }
               className={`flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-normal transition-all duration-200 ${
                 activeDropdown === 'about'
-                  ? 'bg-gray-800/40 text-blue-400'
+                  ? 'bg-gray-800/40 text-[#43b14b]'
                   : 'text-gray-300 hover:bg-gray-800/40 hover:text-white'
               }`}
             >
@@ -410,10 +438,10 @@ const NavbarContent = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute left-0 top-full z-[60] mt-2 flex max-h-[calc(100vh-120px)] w-[360px] min-w-[300px] max-w-[90vw] flex-col overflow-hidden rounded-lg border border-gray-800 bg-gray-900 shadow-xl"
+                  className="absolute left-0 top-full z-[60] mt-2 flex max-h-[calc(100vh-120px)] w-[360px] min-w-[300px] max-w-[90vw] flex-col overflow-hidden rounded-lg border border-gray-800/50 bg-[#1b1b1b] shadow-xl backdrop-blur-sm"
                 >
                   <div
-                    className="scrollbar-thin overflow-y-auto overscroll-contain p-1"
+                    className="overflow-y-auto overscroll-contain p-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     style={{ scrollBehavior: 'smooth' }}
                   >
                     {dropdownContent.about.map((item, index) => (
@@ -423,7 +451,7 @@ const NavbarContent = ({
                         className="group block rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-gray-800"
                         onClick={() => setActiveDropdown(null)}
                       >
-                        <div className="mb-1 text-sm font-medium text-white transition-colors group-hover:text-blue-400">
+                        <div className="mb-1 text-sm font-medium text-white transition-colors group-hover:text-[#43b14b]">
                           {item.title}
                         </div>
                         <div className="line-clamp-2 text-xs leading-relaxed text-gray-400">
@@ -447,7 +475,7 @@ const NavbarContent = ({
               }
               className={`flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-normal transition-all duration-200 ${
                 activeDropdown === 'service'
-                  ? 'bg-gray-800/40 text-blue-400'
+                  ? 'bg-gray-800/40 text-[#43b14b]'
                   : 'text-gray-300 hover:bg-gray-800/40 hover:text-white'
               }`}
             >
@@ -465,10 +493,10 @@ const NavbarContent = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute left-0 top-full z-[60] mt-2 flex max-h-[calc(100vh-120px)] w-[400px] min-w-[320px] max-w-[90vw] flex-col overflow-hidden rounded-lg border border-gray-800 bg-gray-900 shadow-xl"
+                  className="absolute left-0 top-full z-[60] mt-2 flex max-h-[calc(100vh-120px)] w-[400px] min-w-[320px] max-w-[90vw] flex-col overflow-hidden rounded-lg border border-gray-800/50 bg-[#1b1b1b] shadow-xl backdrop-blur-sm"
                 >
                   <div
-                    className="scrollbar-thin overflow-y-auto overscroll-contain p-1"
+                    className="overflow-y-auto overscroll-contain p-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     style={{ scrollBehavior: 'smooth' }}
                   >
                     {dropdownContent.service.categories.map(
@@ -493,7 +521,7 @@ const NavbarContent = ({
                                 className="group ml-2 block rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-gray-800"
                                 onClick={() => setActiveDropdown(null)}
                               >
-                                <div className="mb-1 text-sm font-medium text-white transition-colors group-hover:text-blue-400">
+                                <div className="mb-1 text-sm font-medium text-white transition-colors group-hover:text-[#43b14b]">
                                   {service.title}
                                 </div>
                                 <div className="line-clamp-2 text-xs leading-relaxed text-gray-400">
@@ -506,19 +534,19 @@ const NavbarContent = ({
                           {/* Divider between categories */}
                           {categoryIndex <
                             dropdownContent.service.categories.length - 1 && (
-                            <div className="mx-3 my-3 h-px bg-gray-800" />
+                            <div className="mx-3 my-3 h-px bg-gray-800/50" />
                           )}
                         </div>
                       )
                     )}
                     {/* See All Services Link */}
-                    <div className="mt-2 border-t border-gray-800 pt-2">
+                    <div className="mt-2 border-t border-gray-800/50 pt-2">
                       <Link
                         href="/services"
                         className="group ml-2 block rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-gray-800"
                         onClick={() => setActiveDropdown(null)}
                       >
-                        <div className="flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors group-hover:text-blue-300">
+                        <div className="flex items-center gap-2 text-sm font-medium text-[#43b14b] transition-colors group-hover:text-[#4ade80]">
                           See All Services
                           <ArrowRight className="h-3.5 w-3.5" />
                         </div>
@@ -540,7 +568,7 @@ const NavbarContent = ({
               }
               className={`flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-normal transition-all duration-200 ${
                 activeDropdown === 'pricing'
-                  ? 'bg-gray-800/40 text-blue-400'
+                  ? 'bg-gray-800/40 text-[#43b14b]'
                   : 'text-gray-300 hover:bg-gray-800/40 hover:text-white'
               }`}
             >
@@ -558,10 +586,10 @@ const NavbarContent = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute left-0 top-full z-[60] mt-2 flex max-h-[calc(100vh-120px)] w-[400px] min-w-[320px] max-w-[90vw] flex-col overflow-hidden rounded-lg border border-gray-800 bg-gray-900 shadow-xl"
+                  className="absolute left-0 top-full z-[60] mt-2 flex max-h-[calc(100vh-120px)] w-[400px] min-w-[320px] max-w-[90vw] flex-col overflow-hidden rounded-lg border border-gray-800/50 bg-[#1b1b1b] shadow-xl backdrop-blur-sm"
                 >
                   <div
-                    className="scrollbar-thin overflow-y-auto overscroll-contain p-1"
+                    className="overflow-y-auto overscroll-contain p-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     style={{ scrollBehavior: 'smooth' }}
                   >
                     {dropdownContent.pricing.map((item, index) => (
@@ -571,7 +599,7 @@ const NavbarContent = ({
                         className="group block rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-gray-800"
                         onClick={() => setActiveDropdown(null)}
                       >
-                        <div className="mb-1.5 text-sm font-semibold text-white transition-colors group-hover:text-blue-400">
+                        <div className="mb-1.5 text-sm font-semibold text-white transition-colors group-hover:text-[#43b14b]">
                           {item.title}
                         </div>
                         <div className="text-xs leading-relaxed text-gray-400">
@@ -580,13 +608,13 @@ const NavbarContent = ({
                       </Link>
                     ))}
                     {/* See All Pricing Link */}
-                    <div className="mt-2 border-t border-gray-800 px-3 pt-2">
+                    <div className="mt-2 border-t border-gray-800/50 px-3 pt-2">
                       <Link
                         href="/pricing"
                         className="group block rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-gray-800"
                         onClick={() => setActiveDropdown(null)}
                       >
-                        <div className="flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors group-hover:text-blue-300">
+                        <div className="flex items-center gap-2 text-sm font-medium text-[#43b14b] transition-colors group-hover:text-[#4ade80]">
                           See All Pricing
                           <ArrowRight className="h-3.5 w-3.5" />
                         </div>
@@ -618,34 +646,46 @@ const NavbarContent = ({
           </Link>
         </div>
 
-        {/* Contact & CTA */}
-        <div className="hidden items-center gap-3 lg:flex">
-          <div className="flex items-center gap-2 text-blue-400">
-            <Phone className="h-4 w-4" />
-            <span className="text-sm font-normal">+977 9709098343</span>
-          </div>
-          <Button
-            size="sm"
-            onClick={openQuickEnquiry}
-            className="h-9 rounded-md bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500"
+        {/* Right Side: Contact & CTA + Mobile Menu */}
+        <div className="flex items-center gap-2 lg:gap-3">
+          {/* Phone - Icon only on small, full text on desktop */}
+          <a
+            href="tel:+9779709098343"
+            className="flex h-9 w-9 items-center justify-center gap-1.5 rounded-full border border-gray-800/50 bg-gray-800/30 text-[#43b14b] transition-all hover:border-[#43b14b]/50 hover:bg-gray-800/50 hover:text-[#4ade80] sm:h-10 sm:w-10 lg:h-10 lg:w-auto lg:gap-2 lg:rounded-md lg:border-0 lg:bg-transparent lg:px-3 lg:hover:bg-gray-800/30"
+            title="+977 9709098343"
           >
-            Quick Enquiry
-          </Button>
-        </div>
+            <PhoneCall className="h-4 w-4 flex-shrink-0 stroke-[1.5] sm:h-5 sm:w-5" />
+            <span className="hidden text-sm font-bold lg:inline lg:text-base">
+              +977 9709098343
+            </span>
+          </a>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="rounded-md p-2 transition-colors hover:bg-gray-800 lg:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? (
-            <X className="h-5 w-5 text-white" />
-          ) : (
-            <Menu className="h-5 w-5 text-white" />
-          )}
-        </button>
+          {/* Quick Enquiry - Icon only on small, full text on desktop */}
+          <button
+            onClick={openQuickEnquiry}
+            className="flex h-9 w-9 items-center justify-center gap-1.5 rounded-full bg-[#43b14b] text-white shadow-sm transition-all hover:bg-[#3a9a41] hover:shadow-md sm:h-10 sm:w-10 lg:h-10 lg:w-auto lg:gap-2 lg:rounded-md lg:px-4"
+            title="Quick Enquiry"
+          >
+            <Send className="h-4 w-4 flex-shrink-0 stroke-[1.5] sm:h-5 sm:w-5" />
+            <span className="hidden text-sm font-medium lg:inline">
+              Quick Enquiry
+            </span>
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="rounded-md p-2 transition-colors hover:bg-gray-800/50 lg:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5 text-white" />
+            ) : (
+              <Menu className="h-5 w-5 text-white" />
+            )}
+          </button>
+        </div>
       </div>
     </>
   );
@@ -707,7 +747,7 @@ export function Navbar() {
       {/* Spacer to prevent layout shift */}
       <div className="h-14" aria-hidden="true" />
       <nav
-        className="fixed left-0 right-0 top-0 z-50 w-full border-b border-gray-800 bg-gray-900/95 backdrop-blur-sm transition-transform duration-200 ease-out"
+        className="fixed left-0 right-0 top-0 z-50 w-full border-b border-gray-800/50 bg-[#1b1b1b]/95 backdrop-blur-sm transition-transform duration-200 ease-out"
         style={{
           transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
           willChange: 'transform',
@@ -732,7 +772,7 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[100] bg-[#1b1b1b]/60 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileMenuOpen(false)}
             />
             {/* Sidebar */}
@@ -744,7 +784,7 @@ export function Navbar() {
                 duration: 0.25,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className="fixed right-0 top-0 z-[110] w-[280px] max-w-[85vw] border-l border-gray-800 bg-gray-900 shadow-xl lg:hidden"
+              className="fixed right-0 top-0 z-[110] w-[280px] max-w-[85vw] border-l border-gray-800/50 bg-[#1b1b1b] shadow-xl lg:hidden"
               style={{
                 height: '100vh',
                 display: 'flex',
@@ -753,11 +793,11 @@ export function Navbar() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex h-14 flex-shrink-0 items-center justify-between border-b border-gray-800 bg-gray-900 px-4">
+              <div className="flex h-14 flex-shrink-0 items-center justify-between border-b border-gray-800/50 bg-[#1b1b1b] px-4">
                 <Logo />
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-md p-2 transition-colors hover:bg-gray-800"
+                  className="rounded-md p-2 transition-colors hover:bg-gray-800/50"
                   aria-label="Close menu"
                 >
                   <X className="h-5 w-5 text-white" />
@@ -765,25 +805,10 @@ export function Navbar() {
               </div>
 
               {/* Navigation Links - Scrollable */}
-              <MobileNavContent setMobileMenuOpen={setMobileMenuOpen} />
-
-              {/* Footer */}
-              <div className="flex-shrink-0 border-t border-gray-800 bg-gray-900 p-4">
-                <div className="mb-3 flex items-center gap-2 text-sm text-blue-400">
-                  <Phone className="h-4 w-4 flex-shrink-0" />
-                  <span className="font-medium">+977 9709098343</span>
-                </div>
-                <Button
-                  size="sm"
-                  className="h-10 w-full rounded-md bg-blue-600 text-sm font-medium text-white shadow-lg shadow-blue-500/20 hover:bg-blue-500"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    openQuickEnquiry();
-                  }}
-                >
-                  Quick Enquiry
-                </Button>
-              </div>
+              <MobileNavContent
+                setMobileMenuOpen={setMobileMenuOpen}
+                isOpen={mobileMenuOpen}
+              />
             </motion.div>
           </>
         )}

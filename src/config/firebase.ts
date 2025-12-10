@@ -25,30 +25,31 @@ const firebaseConfig: FirebaseConfig = {
 };
 
 // Initialize Firebase
-let app: FirebaseApp;
 let auth: Auth;
 let db: Firestore;
 let storage: FirebaseStorage;
 let analytics: Analytics | null = null;
 
+// Initialize Firebase app
+const existingApp = getApps()[0];
+const app: FirebaseApp = existingApp || initializeApp(firebaseConfig);
+
 if (typeof window !== 'undefined') {
   // Client-side initialization
-  const existingApp = getApps()[0];
-  app = existingApp || initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
   storage = getStorage(app);
 
   // Initialize Analytics only in browser
-  if (typeof window !== 'undefined' && 'measurementId' in firebaseConfig) {
+  if ('measurementId' in firebaseConfig) {
     analytics = getAnalytics(app);
   }
 } else {
-  // Server-side: create minimal instances
-  const existingApp = getApps()[0];
-  app = existingApp || initializeApp(firebaseConfig);
-  // Note: Auth, Firestore, and Storage should not be initialized on server
-  // They will be initialized on client-side when needed
+  // Server-side: Initialize Firestore for server-side rendering (needed for generateStaticParams)
+  db = getFirestore(app);
+  // Auth and Storage are not needed on server
+  auth = getAuth(app);
+  storage = getStorage(app);
 }
 
 export { app, auth, db, storage, analytics };

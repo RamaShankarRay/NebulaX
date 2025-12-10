@@ -7,6 +7,8 @@ import { ChevronDown, ArrowRight, Check } from 'lucide-react';
 import { useQuickEnquiry } from '@/contexts/quick-enquiry-context';
 import { ServiceDetail } from '@/lib/services-data';
 import { SERVICES } from '@/lib/constants';
+import { StructuredData } from '@/components/seo/structured-data';
+import { usePathname } from 'next/navigation';
 
 interface ServiceDetailClientProps {
   service: ServiceDetail;
@@ -17,15 +19,27 @@ export default function ServiceDetailClient({
 }: ServiceDetailClientProps) {
   const { openModal } = useQuickEnquiry();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const pathname = usePathname();
 
   const handleFaqToggle = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <>
+      <StructuredData
+        config={{
+          title: service.title,
+          description: service.description,
+          image: service.image,
+          url: pathname,
+          type: 'service',
+          tags: service.features?.map((f: string) => f) || [],
+        }}
+      />
+      <div className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
-      <section className="relative border-b border-gray-800 pb-16 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40">
+      <section className="relative pb-16 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -45,7 +59,7 @@ export default function ServiceDetailClient({
             <div className="mt-8">
               <button
                 onClick={openModal}
-                className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                className="inline-flex items-center gap-2 rounded-md bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Let&apos;s start conversation
                 <ArrowRight className="h-4 w-4" />
@@ -56,7 +70,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Stats Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8 lg:grid-cols-5">
             <motion.div
@@ -66,7 +80,7 @@ export default function ServiceDetailClient({
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <div className="mb-2 text-3xl font-semibold text-blue-400 sm:text-4xl lg:text-5xl">
+              <div className="mb-2 text-3xl font-semibold text-[#43b14b] sm:text-4xl lg:text-5xl">
                 {service.stats.years}
               </div>
               <div className="text-xs uppercase tracking-wider text-gray-400 sm:text-sm">
@@ -80,7 +94,7 @@ export default function ServiceDetailClient({
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-center"
             >
-              <div className="mb-2 text-3xl font-semibold text-blue-400 sm:text-4xl lg:text-5xl">
+              <div className="mb-2 text-3xl font-semibold text-[#43b14b] sm:text-4xl lg:text-5xl">
                 {service.stats.clients}
               </div>
               <div className="text-xs uppercase tracking-wider text-gray-400 sm:text-sm">
@@ -94,7 +108,7 @@ export default function ServiceDetailClient({
               transition={{ duration: 0.4, delay: 0.2 }}
               className="text-center"
             >
-              <div className="mb-2 text-3xl font-semibold text-blue-400 sm:text-4xl lg:text-5xl">
+              <div className="mb-2 text-3xl font-semibold text-[#43b14b] sm:text-4xl lg:text-5xl">
                 {service.stats.projects}
               </div>
               <div className="text-xs uppercase tracking-wider text-gray-400 sm:text-sm">
@@ -108,7 +122,7 @@ export default function ServiceDetailClient({
               transition={{ duration: 0.4, delay: 0.3 }}
               className="text-center"
             >
-              <div className="mb-2 text-3xl font-semibold text-blue-400 sm:text-4xl lg:text-5xl">
+              <div className="mb-2 text-3xl font-semibold text-[#43b14b] sm:text-4xl lg:text-5xl">
                 {service.stats.team}
               </div>
               <div className="text-xs uppercase tracking-wider text-gray-400 sm:text-sm">
@@ -123,7 +137,7 @@ export default function ServiceDetailClient({
                 transition={{ duration: 0.4, delay: 0.4 }}
                 className="text-center"
               >
-                <div className="mb-2 text-lg font-semibold text-blue-400 sm:text-xl">
+                <div className="mb-2 text-lg font-semibold text-[#43b14b] sm:text-xl">
                   {service.stats.guarantee}
                 </div>
                 <div className="text-xs uppercase tracking-wider text-gray-400 sm:text-sm">
@@ -136,7 +150,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Features Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
             {service.features.map((feature, index) => (
@@ -149,8 +163,8 @@ export default function ServiceDetailClient({
                 className="text-center"
               >
                 <div className="mb-4">
-                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-gray-800 bg-gray-900">
-                    <Check className="h-8 w-8 text-blue-400" />
+                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-gray-800/50 bg-gray-900/30">
+                    <Check className="h-8 w-8 text-[#43b14b]" />
                   </div>
                 </div>
                 <h3 className="mb-2 text-lg font-semibold text-white">
@@ -166,7 +180,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Industries Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -191,7 +205,7 @@ export default function ServiceDetailClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="rounded-lg border border-gray-800 bg-gray-900/50 p-6 transition-colors hover:border-gray-700"
+                className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 transition-colors hover:border-gray-700"
               >
                 <h3 className="mb-3 text-xl font-semibold text-white">
                   {industry.title}
@@ -206,7 +220,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Technology Stack Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -232,7 +246,7 @@ export default function ServiceDetailClient({
                 {service.techStack.frontend.map((tech, index) => (
                   <span
                     key={index}
-                    className="rounded-md border border-gray-800 bg-gray-900 px-4 py-2 text-sm text-gray-300"
+                    className="rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2 text-sm text-gray-300"
                   >
                     {tech}
                   </span>
@@ -245,7 +259,7 @@ export default function ServiceDetailClient({
                 {service.techStack.backend.map((tech, index) => (
                   <span
                     key={index}
-                    className="rounded-md border border-gray-800 bg-gray-900 px-4 py-2 text-sm text-gray-300"
+                    className="rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2 text-sm text-gray-300"
                   >
                     {tech}
                   </span>
@@ -260,7 +274,7 @@ export default function ServiceDetailClient({
                 {service.techStack.infrastructure.map((tech, index) => (
                   <span
                     key={index}
-                    className="rounded-md border border-gray-800 bg-gray-900 px-4 py-2 text-sm text-gray-300"
+                    className="rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2 text-sm text-gray-300"
                   >
                     {tech}
                   </span>
@@ -272,7 +286,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Process/Roadmap Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -298,7 +312,7 @@ export default function ServiceDetailClient({
                   className="flex gap-6"
                 >
                   <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 font-semibold text-white">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#43b14b] font-semibold text-white">
                       {step.number}
                     </div>
                   </div>
@@ -318,7 +332,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -349,7 +363,7 @@ export default function ServiceDetailClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="rounded-lg border border-gray-800 bg-gray-900/50 p-6 transition-colors hover:border-gray-700"
+                className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 transition-colors hover:border-gray-700"
               >
                 <h3 className="mb-2 text-lg font-semibold text-white">
                   {item.title}
@@ -364,7 +378,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* Portfolio Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -389,9 +403,9 @@ export default function ServiceDetailClient({
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="relative aspect-square overflow-hidden rounded-lg border border-gray-800 bg-gray-900 transition-colors hover:border-gray-700"
+                className="relative aspect-square overflow-hidden rounded-lg border border-gray-800/50 bg-gray-900/30 transition-colors hover:border-gray-700"
               >
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-900/30">
                   <span className="px-2 text-center text-sm text-gray-400">
                     {item.title}
                   </span>
@@ -403,7 +417,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* CTA Section with Questions */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -423,7 +437,7 @@ export default function ServiceDetailClient({
               {service.ctaQuestions.map((item, index) => (
                 <div
                   key={index}
-                  className="rounded-lg border border-gray-800 bg-gray-900/50 p-4 text-center"
+                  className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 text-center"
                 >
                   <div className="mb-2 text-2xl">{index + 1}</div>
                   <p className="text-xs text-gray-400 sm:text-sm">
@@ -433,7 +447,7 @@ export default function ServiceDetailClient({
               ))}
             </div>
 
-            <div className="rounded-lg border border-gray-800 bg-gray-900 p-6 sm:p-8">
+            <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 sm:p-8">
               <h3 className="mb-4 text-xl font-semibold text-white">
                 Check Your Website Quality for Free
               </h3>
@@ -442,26 +456,26 @@ export default function ServiceDetailClient({
                   <input
                     type="url"
                     placeholder="type Website URL*"
-                    className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                    className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-3 text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                   />
                 </div>
                 <div>
                   <input
                     type="email"
                     placeholder="your Email*"
-                    className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                    className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-3 text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                   />
                 </div>
                 <div>
                   <input
                     type="tel"
                     placeholder="Phone Number"
-                    className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                    className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-3 text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-md bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                  className="w-full rounded-md bg-[#43b14b] px-6 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
                 >
                   Submit Now
                 </button>
@@ -472,7 +486,7 @@ export default function ServiceDetailClient({
       </section>
 
       {/* FAQs Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -501,11 +515,11 @@ export default function ServiceDetailClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="overflow-hidden rounded-lg border border-gray-800 bg-gray-900/50"
+                className="overflow-hidden rounded-lg border border-gray-800/50 bg-gray-900/30"
               >
                 <button
                   onClick={() => handleFaqToggle(index)}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-800/50"
+                  className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-900/50"
                 >
                   <span className="pr-4 text-base font-medium text-white">
                     {faq.question}
@@ -517,7 +531,7 @@ export default function ServiceDetailClient({
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="border-t border-gray-800 px-6 py-4">
+                  <div className="px-6 py-4">
                     <p className="text-sm leading-relaxed text-gray-400">
                       {faq.answer}
                     </p>
@@ -558,9 +572,9 @@ export default function ServiceDetailClient({
                   <Link
                     key={index}
                     href={`/services/${slug}`}
-                    className="group rounded-lg border border-gray-800 bg-gray-900/50 p-4 transition-colors hover:border-gray-700 hover:bg-gray-900"
+                    className="group rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 transition-colors hover:border-gray-700 hover:bg-gray-900/50"
                   >
-                    <h3 className="mb-2 text-base font-semibold text-white transition-colors group-hover:text-blue-400">
+                    <h3 className="mb-2 text-base font-semibold text-white transition-colors group-hover:text-[#43b14b]">
                       {otherService.title}
                     </h3>
                     <p className="line-clamp-2 text-xs text-gray-400">
@@ -573,5 +587,6 @@ export default function ServiceDetailClient({
         </div>
       </section>
     </div>
+    </>
   );
 }

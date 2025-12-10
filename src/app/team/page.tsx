@@ -118,7 +118,7 @@ export default function TeamPage() {
   }, [activeCard]);
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
       <section className="relative pb-16 pt-32 sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-48">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,8 +128,8 @@ export default function TeamPage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-4xl text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Our Team
               </span>
@@ -137,7 +137,7 @@ export default function TeamPage() {
             <h1 className="mb-6 text-4xl font-normal leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Meet The People
               <br />
-              <span className="text-blue-400">Behind NebulaX</span>
+              <span className="text-[#43b14b]">Behind NebulaX</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-400 sm:text-xl">
               A diverse team of talented professionals dedicated to delivering
@@ -225,7 +225,7 @@ export default function TeamPage() {
                           className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 transition-colors hover:bg-gray-700 active:bg-gray-600"
                           aria-label="Email"
                         >
-                          <Mail className="h-4 w-4 text-gray-400 transition-colors hover:text-blue-400" />
+                          <Mail className="h-4 w-4 text-gray-400 transition-colors hover:text-[#43b14b]" />
                         </a>
                         <a
                           href={member.linkedin}
@@ -233,7 +233,7 @@ export default function TeamPage() {
                           className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 transition-colors hover:bg-gray-700 active:bg-gray-600"
                           aria-label="LinkedIn"
                         >
-                          <Linkedin className="h-4 w-4 text-gray-400 transition-colors hover:text-blue-400" />
+                          <Linkedin className="h-4 w-4 text-gray-400 transition-colors hover:text-[#43b14b]" />
                         </a>
                       </div>
                     </div>
@@ -244,8 +244,8 @@ export default function TeamPage() {
                     <h3
                       className={`mb-1 text-lg font-medium transition-colors ${
                         activeCard === index
-                          ? 'text-blue-400'
-                          : 'text-white group-hover:text-blue-400'
+                          ? 'text-[#43b14b]'
+                          : 'text-white group-hover:text-[#43b14b]'
                       }`}
                     >
                       {member.name}
@@ -287,7 +287,7 @@ export default function TeamPage() {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="text-center"
               >
-                <div className="mb-1.5 text-3xl font-bold text-blue-400 sm:text-4xl">
+                <div className="mb-1.5 text-3xl font-bold text-[#43b14b] sm:text-4xl">
                   {dept.count}
                 </div>
                 <h3 className="text-sm font-medium text-white sm:text-base">
@@ -344,7 +344,7 @@ export default function TeamPage() {
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/#career"
-                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-500"
+                className="inline-flex items-center justify-center rounded-lg bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 View Careers
               </Link>

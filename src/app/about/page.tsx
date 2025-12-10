@@ -72,7 +72,7 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
       <section className="relative pb-20 pt-32 sm:pb-28 sm:pt-40 lg:pb-36 lg:pt-48">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,8 +82,8 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-4xl text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 About Us
               </span>
@@ -91,7 +91,7 @@ export default function AboutPage() {
             <h1 className="mb-6 text-4xl font-normal leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Transforming Digital
               <br />
-              <span className="text-blue-400">Visions Into Reality</span>
+              <span className="text-[#43b14b]">Visions Into Reality</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-400 sm:text-xl">
               NebulaX Research & Technologies Pvt. Ltd. is Nepal&apos;s premier
@@ -158,8 +158,8 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="mb-12 text-center sm:mb-16"
           >
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Our Values
               </span>
@@ -185,12 +185,12 @@ export default function AboutPage() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-6 transition-all duration-200 hover:border-blue-500/50 hover:bg-gray-900/50 sm:p-8">
+                  <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-6 transition-all duration-200 hover:border-[#43b14b]/50 hover:bg-gray-900/50 sm:p-8">
                     <div className="mb-4 flex items-center gap-4">
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-600/10 transition-colors group-hover:border-blue-500/40 group-hover:bg-blue-600/20">
-                        <Icon className="h-6 w-6 text-blue-400" />
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-[#43b14b]/20 bg-[#43b14b]/10 transition-colors group-hover:border-[#43b14b]/40 group-hover:bg-[#43b14b]/20">
+                        <Icon className="h-6 w-6 text-[#43b14b]" />
                       </div>
-                      <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-blue-400">
+                      <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-[#43b14b]">
                         {value.title}
                       </h3>
                     </div>
@@ -215,8 +215,8 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="mb-12 text-center sm:mb-16"
           >
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Our Journey
               </span>
@@ -247,14 +247,14 @@ export default function AboutPage() {
                   >
                     {/* Timeline Dot */}
                     <div className="relative z-10 flex-shrink-0">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-blue-500/30 bg-blue-600/10 transition-colors group-hover:border-blue-500/50 group-hover:bg-blue-600/20">
-                        <div className="h-3 w-3 rounded-full bg-blue-400" />
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#43b14b]/30 bg-[#43b14b]/10 transition-colors group-hover:border-[#43b14b]/50 group-hover:bg-[#43b14b]/20">
+                        <div className="h-3 w-3 rounded-full bg-[#43b14b]" />
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 pt-1">
-                      <div className="mb-2 text-sm font-medium text-blue-400">
+                      <div className="mb-2 text-sm font-medium text-[#43b14b]">
                         {milestone.year}
                       </div>
                       <h3 className="mb-2 text-xl font-semibold text-white">
@@ -285,10 +285,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.6 }}
                 className="group"
               >
-                <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-8 transition-all duration-200 hover:border-blue-500/50 hover:bg-gray-900/50">
+                <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-8 transition-all duration-200 hover:border-[#43b14b]/50 hover:bg-gray-900/50">
                   <div className="mb-6 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-600/10">
-                      <Target className="h-6 w-6 text-blue-400" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#43b14b]/20 bg-[#43b14b]/10">
+                      <Target className="h-6 w-6 text-[#43b14b]" />
                     </div>
                     <h3 className="text-2xl font-semibold text-white">
                       Our Mission
@@ -312,10 +312,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="group"
               >
-                <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-8 transition-all duration-200 hover:border-blue-500/50 hover:bg-gray-900/50">
+                <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-8 transition-all duration-200 hover:border-[#43b14b]/50 hover:bg-gray-900/50">
                   <div className="mb-6 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-600/10">
-                      <Lightbulb className="h-6 w-6 text-blue-400" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#43b14b]/20 bg-[#43b14b]/10">
+                      <Lightbulb className="h-6 w-6 text-[#43b14b]" />
                     </div>
                     <h3 className="text-2xl font-semibold text-white">
                       Our Vision
@@ -355,7 +355,7 @@ export default function AboutPage() {
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/#contact"
-                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-500"
+                className="inline-flex items-center justify-center rounded-lg bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Get Started
               </Link>

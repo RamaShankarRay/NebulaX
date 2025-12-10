@@ -1,0 +1,98 @@
+# Robots.txt for NebulaX - Digital Solutions Company
+# Last updated: 2025-01-27
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /api/
+Disallow: /auth/
+
+# Allow public content areas
+Allow: /services/
+Allow: /portfolio/
+Allow: /pricing/
+Allow: /career/
+Allow: /blog/
+Allow: /about/
+Allow: /contact/
+Allow: /team/
+Allow: /work/
+Allow: /activities/
+
+# Sitemap location
+Sitemap: https://nebulax-aac9e.web.app/sitemap.xml
+
+# Crawl delay (be respectful to server resources)
+Crawl-delay: 1
+
+# Additional SEO directives
+# Allow Google to index all content
+User-agent: Googlebot
+Allow: /
+
+# Allow Bing to index all content
+User-agent: Bingbot
+Allow: /
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: facebot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: LinkedInBot/*
+Allow: /
+
+User-agent: linkedinbot
+Allow: /
+
+User-agent: Medium
+Allow: /
+
+User-agent: Mediumbot
+Allow: /
+
+User-agent: redditbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Pinterest
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: SkypeUriPreview
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Quora
+Allow: /
+
+User-agent: Flipboard
+Allow: /
+

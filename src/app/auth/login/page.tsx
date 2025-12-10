@@ -59,27 +59,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const user = await AuthService.signInWithGoogle();
-      setUser({
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-      });
-      router.push('/dashboard');
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : 'Failed to sign in with Google'
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10 p-4">
       <Card className="w-full max-w-md">
@@ -128,17 +107,6 @@ export default function LoginPage() {
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
-          <div className="mt-4">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              onClick={handleGoogleSignIn}
-              disabled={loading}
-            >
-              Sign in with Google
-            </Button>
-          </div>
           <div className="mt-4 text-center text-sm">
             <Link
               href="/auth/forgot-password"
@@ -147,11 +115,9 @@ export default function LoginPage() {
               Forgot password?
             </Link>
           </div>
-          <div className="mt-2 text-center text-sm">
-            Don&apos;t have an account?{' '}
-            <Link href="/auth/signup" className="text-primary hover:underline">
-              Sign up
-            </Link>
+          <div className="mt-2 text-center text-xs text-muted-foreground">
+            Access restricted to pre-approved NebulaX accounts. Contact the
+            admin if you need access.
           </div>
         </CardContent>
       </Card>

@@ -66,7 +66,7 @@ export function Expertise() {
   return (
     <section
       id="expertise"
-      className="relative bg-black py-12 sm:py-16 lg:py-20"
+      className="relative bg-[#1b1b1b] py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Two Column Layout */}
@@ -77,17 +77,17 @@ export function Expertise() {
             <div>
               {/* Our Expertise Label with lines */}
               <div className="mb-4 flex items-center gap-4">
-                <div className="h-px w-12 bg-blue-400" />
+                <div className="h-px w-12 bg-[#43b14b]" />
                 <p className="text-sm font-medium uppercase tracking-wider text-gray-400">
                   Our Expertise
                 </p>
-                <div className="h-px w-12 bg-blue-400" />
+                <div className="h-px w-12 bg-[#43b14b]" />
               </div>
 
               {/* Main Title */}
               <h2 className="mb-6 text-2xl font-semibold sm:text-3xl lg:text-4xl">
                 <span className="text-white">Technologies We Rely On To </span>
-                <span className="text-blue-400">Achieve Success</span>
+                <span className="text-[#43b14b]">Achieve Success</span>
               </h2>
             </div>
 
@@ -109,7 +109,7 @@ export function Expertise() {
                       }
                       className={`flex h-10 items-center whitespace-nowrap px-3 py-2 text-sm font-medium transition-colors ${
                         activeTab === tab.id
-                          ? 'text-blue-400'
+                          ? 'text-[#43b14b]'
                           : 'text-gray-400 hover:text-white'
                       }`}
                     >
@@ -144,7 +144,7 @@ export function Expertise() {
                         transition={{ duration: 0.2, delay: index * 0.03 }}
                         className="group"
                       >
-                        <div className="flex h-16 flex-col items-center justify-center rounded-lg border border-gray-800 bg-gray-900/50 p-2 transition-all duration-200 hover:border-blue-500/50 hover:bg-gray-900 sm:h-20 sm:p-3 md:h-24">
+                        <div className="flex h-16 flex-col items-center justify-center rounded-lg border border-gray-800 bg-gray-900/50 p-2 transition-all duration-200 hover:border-[#43b14b]/50 hover:bg-gray-900 sm:h-20 sm:p-3 md:h-24">
                           {logoUrl ? (
                             <div className="relative mb-1 h-10 w-full flex-shrink-0 sm:mb-2 sm:h-12">
                               <Image

@@ -9,6 +9,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'import'],
   root: true,
+  ignorePatterns: ['lib/**/*'],
   rules: {
     quotes: ['error', 'single'],
   },

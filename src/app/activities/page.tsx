@@ -256,7 +256,7 @@ export default function ActivitiesPage() {
   }, [selectedActivity]);
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
       <section className="relative pb-16 pt-32 sm:pb-20 sm:pt-40 lg:pb-24 lg:pt-48">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -266,8 +266,8 @@ export default function ActivitiesPage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-4xl text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Life at NebulaX
               </span>
@@ -275,7 +275,7 @@ export default function ActivitiesPage() {
             <h1 className="mb-6 text-4xl font-normal leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Moments We
               <br />
-              <span className="text-blue-400">Share Together</span>
+              <span className="text-[#43b14b]">Share Together</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-400 sm:text-xl">
               A glimpse into the daily life, celebrations, and activities of the
@@ -314,11 +314,11 @@ export default function ActivitiesPage() {
                     />
 
                     {/* Minimal Overlay - Only on hover */}
-                    <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
+                    <div className="absolute inset-0 bg-[#1b1b1b]/0 transition-colors group-hover:bg-[#1b1b1b]/20" />
 
                     {/* Minimal Date - Top Left */}
                     <div className="absolute left-2 top-2 opacity-0 transition-opacity group-hover:opacity-100">
-                      <span className="rounded bg-black/50 px-2 py-1 text-xs font-medium text-white">
+                      <span className="rounded bg-[#1b1b1b]/50 px-2 py-1 text-xs font-medium text-white">
                         {activity.date}
                       </span>
                     </div>
@@ -326,7 +326,7 @@ export default function ActivitiesPage() {
                     {/* Video Indicator - Minimal */}
                     {hasVideo && (
                       <div className="absolute right-2 top-2">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-black/60 backdrop-blur-sm">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1b1b1b]/60 backdrop-blur-sm">
                           <Video
                             className="h-4 w-4 text-white"
                             fill="currentColor"
@@ -338,7 +338,7 @@ export default function ActivitiesPage() {
                     {/* Media Count - Minimal */}
                     {mediaCount > 1 && (
                       <div className="absolute bottom-2 right-2">
-                        <span className="rounded bg-black/60 px-2 py-1 text-xs font-medium text-white">
+                        <span className="rounded bg-[#1b1b1b]/60 px-2 py-1 text-xs font-medium text-white">
                           {mediaCount}
                         </span>
                       </div>
@@ -347,7 +347,7 @@ export default function ActivitiesPage() {
 
                   {/* Title Below Card - Google Style */}
                   <div className="mt-2 px-1">
-                    <h3 className="truncate text-sm font-medium text-white transition-colors group-hover:text-blue-400">
+                    <h3 className="truncate text-sm font-medium text-white transition-colors group-hover:text-[#43b14b]">
                       {activity.title}
                     </h3>
                     <p className="mt-0.5 truncate text-xs text-gray-500">
@@ -380,7 +380,7 @@ export default function ActivitiesPage() {
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/#career"
-                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-500"
+                className="inline-flex items-center justify-center rounded-lg bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 View Careers
               </Link>
@@ -403,7 +403,7 @@ export default function ActivitiesPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1b1b1b]"
             onClick={closeModal}
           >
             <motion.div
@@ -429,7 +429,7 @@ export default function ActivitiesPage() {
                   )}
                   <button
                     onClick={closeModal}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-black/40 transition-colors hover:bg-black/60"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1b1b1b]/40 transition-colors hover:bg-[#1b1b1b]/60"
                     aria-label="Close"
                   >
                     <span className="text-lg leading-none text-white">×</span>
@@ -484,7 +484,7 @@ export default function ActivitiesPage() {
                         e.stopPropagation();
                         prevMedia();
                       }}
-                      className="absolute left-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 transition-colors hover:bg-black/60 sm:left-4"
+                      className="absolute left-2 flex h-9 w-9 items-center justify-center rounded-full bg-[#1b1b1b]/40 transition-colors hover:bg-[#1b1b1b]/60 sm:left-4"
                       aria-label="Previous"
                     >
                       <span className="text-xl text-white">‹</span>
@@ -494,7 +494,7 @@ export default function ActivitiesPage() {
                         e.stopPropagation();
                         nextMedia();
                       }}
-                      className="absolute right-2 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 transition-colors hover:bg-black/60 sm:right-4"
+                      className="absolute right-2 flex h-9 w-9 items-center justify-center rounded-full bg-[#1b1b1b]/40 transition-colors hover:bg-[#1b1b1b]/60 sm:right-4"
                       aria-label="Next"
                     >
                       <span className="text-xl text-white">›</span>
@@ -513,7 +513,7 @@ export default function ActivitiesPage() {
                         onClick={() => setSelectedMediaIndex(index)}
                         className={`h-12 w-12 flex-shrink-0 overflow-hidden rounded transition-all ${
                           selectedMediaIndex === index
-                            ? 'ring-2 ring-blue-500'
+                            ? 'ring-2 ring-[#43b14b]'
                             : 'opacity-50 hover:opacity-100'
                         }`}
                       >
@@ -528,7 +528,7 @@ export default function ActivitiesPage() {
                           />
                         ) : (
                           <div className="flex h-full w-full items-center justify-center bg-gray-800">
-                            <Video className="h-4 w-4 text-blue-400" />
+                            <Video className="h-4 w-4 text-[#43b14b]" />
                           </div>
                         )}
                       </button>

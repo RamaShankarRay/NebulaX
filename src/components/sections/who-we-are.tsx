@@ -25,24 +25,24 @@ export function WhoWeAre() {
   return (
     <section
       id="who-we-are"
-      className="relative bg-black py-12 sm:py-16 lg:py-20"
+      className="relative bg-[#1b1b1b] py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Centered */}
         <div className="mb-8 text-center sm:mb-10 lg:mb-12">
           {/* Who We Are Label with lines */}
           <div className="mb-3 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-blue-400" />
+            <div className="h-px w-12 bg-[#43b14b]" />
             <p className="text-sm font-medium uppercase tracking-wider text-gray-400">
               Who We Are
             </p>
-            <div className="h-px w-12 bg-blue-400" />
+            <div className="h-px w-12 bg-[#43b14b]" />
           </div>
 
           {/* Main Title */}
           <h2 className="mb-3 text-2xl font-semibold sm:text-3xl lg:text-4xl">
             <span className="text-white">Nepal&apos;s Leading </span>
-            <span className="text-blue-400">IT Solutions Provider</span>
+            <span className="text-[#43b14b]">IT Solutions Provider</span>
           </h2>
 
           {/* Description */}
@@ -68,12 +68,12 @@ export function WhoWeAre() {
                   className="group relative"
                 >
                   {/* Subtle gradient overlay on hover */}
-                  <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500/0 to-blue-600/0 transition-all duration-300 group-hover:from-blue-500/5 group-hover:to-blue-600/5" />
+                  <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-[#43b14b]/0 to-[#3a9a41]/0 transition-all duration-300 group-hover:from-[#43b14b]/5 group-hover:to-[#3a9a41]/5" />
 
-                  <div className="relative flex items-center gap-4 rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 transition-all duration-200 group-hover:border-blue-500/40 group-hover:bg-gray-900/50 sm:p-5">
+                  <div className="relative flex items-center gap-4 rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 transition-all duration-200 group-hover:border-[#43b14b]/40 group-hover:bg-gray-900/50 sm:p-5">
                     {/* Icon - Compact */}
-                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-600/10">
-                      <Icon className="h-5 w-5 text-blue-400" />
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-[#43b14b]/20 bg-[#43b14b]/10">
+                      <Icon className="h-5 w-5 text-[#43b14b]" />
                     </div>
 
                     {/* Content - Compact */}
@@ -100,9 +100,9 @@ export function WhoWeAre() {
             className="group relative"
           >
             {/* Subtle gradient overlay on hover */}
-            <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500/0 to-blue-600/0 transition-all duration-300 group-hover:from-blue-500/5 group-hover:to-blue-600/5" />
+            <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-br from-[#43b14b]/0 to-[#3a9a41]/0 transition-all duration-300 group-hover:from-[#43b14b]/5 group-hover:to-[#3a9a41]/5" />
 
-            <div className="relative rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 transition-all duration-200 group-hover:border-blue-500/40 group-hover:bg-gray-900/50 sm:p-8">
+            <div className="relative rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 transition-all duration-200 group-hover:border-[#43b14b]/40 group-hover:bg-gray-900/50 sm:p-8">
               <div className="space-y-5 sm:space-y-6">
                 {/* Our Commitment */}
                 <div>

@@ -121,7 +121,7 @@ const benefits = [
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
       <section className="relative pb-20 pt-32 sm:pb-28 sm:pt-40 lg:pb-36 lg:pt-48">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -131,8 +131,8 @@ export default function WorkPage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-4xl text-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Our Process
               </span>
@@ -140,7 +140,7 @@ export default function WorkPage() {
             <h1 className="mb-6 text-4xl font-normal leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               How We Work
               <br />
-              <span className="text-blue-400">To Deliver Excellence</span>
+              <span className="text-[#43b14b]">To Deliver Excellence</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-400 sm:text-xl">
               Our proven methodology ensures seamless collaboration, transparent
@@ -175,8 +175,8 @@ export default function WorkPage() {
                             {step.number}
                           </div>
                           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-600/10 transition-colors group-hover:border-blue-500/40 group-hover:bg-blue-600/20">
-                              <Icon className="h-6 w-6 text-blue-400" />
+                            <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#43b14b]/20 bg-[#43b14b]/10 transition-colors group-hover:border-[#43b14b]/40 group-hover:bg-[#43b14b]/20">
+                              <Icon className="h-6 w-6 text-[#43b14b]" />
                             </div>
                           </div>
                         </div>
@@ -184,7 +184,7 @@ export default function WorkPage() {
 
                       {/* Step Content */}
                       <div className="min-w-0 flex-1">
-                        <h3 className="mb-4 text-2xl font-semibold text-white transition-colors group-hover:text-blue-400 sm:text-3xl">
+                        <h3 className="mb-4 text-2xl font-semibold text-white transition-colors group-hover:text-[#43b14b] sm:text-3xl">
                           {step.title}
                         </h3>
                         <p className="mb-6 text-base leading-relaxed text-gray-300 sm:text-lg">
@@ -198,7 +198,7 @@ export default function WorkPage() {
                               key={detailIndex}
                               className="flex items-start gap-3"
                             >
-                              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-400" />
+                              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#43b14b]" />
                               <span className="text-sm leading-relaxed text-gray-400">
                                 {detail}
                               </span>
@@ -230,8 +230,8 @@ export default function WorkPage() {
             transition={{ duration: 0.6 }}
             className="mb-12 text-center sm:mb-16"
           >
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Why Choose Us
               </span>
@@ -256,13 +256,13 @@ export default function WorkPage() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-6 transition-all duration-200 hover:border-blue-500/50 hover:bg-gray-900/50">
+                  <div className="h-full rounded-lg border border-gray-800 bg-gray-900/30 p-6 transition-all duration-200 hover:border-[#43b14b]/50 hover:bg-gray-900/50">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-blue-500/20 bg-blue-600/10 transition-colors group-hover:border-blue-500/40 group-hover:bg-blue-600/20">
-                        <Icon className="h-6 w-6 text-blue-400" />
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-[#43b14b]/20 bg-[#43b14b]/10 transition-colors group-hover:border-[#43b14b]/40 group-hover:bg-[#43b14b]/20">
+                        <Icon className="h-6 w-6 text-[#43b14b]" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-blue-400">
+                        <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-[#43b14b]">
                           {benefit.title}
                         </h3>
                         <p className="text-sm leading-relaxed text-gray-400">
@@ -298,7 +298,7 @@ export default function WorkPage() {
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/#contact"
-                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-500"
+                className="inline-flex items-center justify-center rounded-lg bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Get Started
               </Link>

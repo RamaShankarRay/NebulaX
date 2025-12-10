@@ -7,7 +7,7 @@ import { useQuickEnquiry } from '@/contexts/quick-enquiry-context';
 export function CTASection() {
   const { openModal } = useQuickEnquiry();
   return (
-    <section id="cta" className="relative bg-black py-12 sm:py-16 lg:py-20">
+    <section id="cta" className="relative bg-[#1b1b1b] py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {/* Main Title */}
@@ -25,10 +25,10 @@ export function CTASection() {
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             {/* Phone Number */}
             <div className="flex items-center gap-3 text-xl font-medium text-white sm:text-2xl">
-              <Phone className="h-5 w-5 text-blue-400 sm:h-6 sm:w-6" />
+              <Phone className="h-5 w-5 text-[#43b14b] sm:h-6 sm:w-6" />
               <a
                 href="tel:+9779709098343"
-                className="transition-colors hover:text-blue-400"
+                className="transition-colors hover:text-[#43b14b]"
               >
                 +977 9709098343
               </a>
@@ -38,7 +38,7 @@ export function CTASection() {
             <Button
               size="lg"
               onClick={openModal}
-              className="rounded-lg bg-blue-600 px-8 py-6 text-base font-medium text-white transition-colors hover:bg-blue-500 sm:text-lg"
+              className="rounded-lg bg-[#43b14b] px-8 py-6 text-base font-medium text-white transition-colors hover:bg-[#3a9a41] sm:text-lg"
             >
               Let&apos;s Start Conversation
             </Button>

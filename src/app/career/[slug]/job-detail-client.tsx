@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import {
   Calendar,
@@ -11,13 +10,22 @@ import {
   Check,
 } from 'lucide-react';
 import { useQuickEnquiry } from '@/contexts/quick-enquiry-context';
-import { JobDetail } from '@/lib/career-data';
+import type { AdminJob } from '@/lib/admin/jobs-admin';
+import { StorageService } from '@/lib/services/storage.service';
+import { FirestoreService } from '@/lib/services/firestore.service';
+import { Loader2, CheckCircle2 } from 'lucide-react';
+import { StructuredData } from '@/components/seo/structured-data';
+import { usePathname } from 'next/navigation';
 
 interface JobDetailClientProps {
-  job: JobDetail;
+  job: AdminJob;
 }
 
 export default function JobDetailClient({ job }: JobDetailClientProps) {
+  const pathname = usePathname();
+  const publishedTime = job.postedDate 
+    ? new Date(job.postedDate).toISOString()
+    : undefined;
   const { openModal } = useQuickEnquiry();
   const [formData, setFormData] = useState({
     name: '',
@@ -32,10 +40,62 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setSubmitting(true);
+    setSubmitError('');
+    setSubmitSuccess(false);
+
+    try {
+      let cvUrl = '';
+      let cvStoragePath = '';
+
+      // Upload CV if provided
+      if (formData.cv) {
+        const fileName = `cv_${Date.now()}_${formData.cv.name}`;
+        cvStoragePath = `job-applications/${job.id || 'unknown'}/${fileName}`;
+        cvUrl = await StorageService.uploadFile(cvStoragePath, formData.cv);
+      }
+
+      // Save application to Firestore
+      const application = {
+        jobId: job.id || '',
+        jobTitle: job.title,
+        jobSlug: job.slug,
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        phone: formData.phone.trim(),
+        address: formData.address.trim() || '',
+        coverLetter: formData.coverLetter.trim() || '',
+        cvUrl: cvUrl || '',
+        cvStoragePath: cvStoragePath || '',
+        status: 'pending' as const,
+      };
+
+      await FirestoreService.createDocument('job-applications', application);
+
+      setSubmitSuccess(true);
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        coverLetter: '',
+        cv: null,
+      });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit application');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleShare = (platform: string) => {
@@ -53,45 +113,45 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* Hero Section - Google Standard */}
-      <section className="relative border-b border-gray-800 pb-12 pt-20 sm:pb-16 sm:pt-24">
+    <>
+      <StructuredData
+        config={{
+          title: `${job.title} - Career at NebulaX`,
+          description: job.shortDescription || `Join our team as ${job.title}.`,
+          url: pathname,
+          type: 'job',
+          section: job.category,
+          publishedTime,
+        }}
+      />
+      <div className="min-h-screen bg-[#1b1b1b]">
+      {/* Hero Section - Compact */}
+      <section className="relative pb-8 pt-12 sm:pb-10 sm:pt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-4xl"
-          >
-            <div className="mb-6 flex items-center justify-center gap-3">
-              <div className="h-px w-16 bg-gray-700" />
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <div className="h-px w-12 bg-gray-700" />
               <span className="text-xs font-medium uppercase tracking-[0.15em] text-gray-500">
                 Career
               </span>
-              <div className="h-px w-16 bg-gray-700" />
+              <div className="h-px w-12 bg-gray-700" />
             </div>
-            <h1 className="text-center text-4xl font-normal leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="text-center text-3xl font-normal leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl">
               {job.title}
             </h1>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Job Details & Application Form */}
-      <section className="py-12 sm:py-16 lg:py-20">
+      <section className="py-8 sm:py-10 lg:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             {/* Left Column - Job Details */}
-            <div className="space-y-8 lg:col-span-2">
+            <div className="space-y-6 lg:col-span-2">
               {/* Job Information - Compact Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="rounded-lg border border-gray-800 bg-gray-900 p-6"
-              >
-                <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 sm:p-5">
+                <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
                   <div>
                     <p className="mb-1 text-xs text-gray-500">
                       Functional Title
@@ -119,158 +179,137 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                   <div>
                     <p className="mb-1 text-xs text-gray-500">Posted date</p>
                     <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-gray-400" />
+                      <Calendar className="h-4 w-4 text-[#43b14b]" />
                       <p className="text-sm font-medium text-white">
-                        {job.postedDate}
+                        {job.postedDate ? (job.postedDate.includes('/') ? job.postedDate : job.postedDate.replace(/-/g, '/')) : 'N/A'}
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Share This Job */}
-                <div className="border-t border-gray-800 pt-4">
-                  <p className="mb-3 text-xs font-medium uppercase tracking-wider text-gray-400">
+                <div className="relative pt-3 sm:pt-4">
+                  <p className="mb-2 text-xs font-medium uppercase tracking-wider text-gray-400">
                     Share This Job
                   </p>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleShare('whatsapp')}
-                      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-800 bg-gray-800 transition-colors hover:bg-gray-700"
+                      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30"
                       aria-label="Share on WhatsApp"
                     >
                       <Share2 className="h-4 w-4 text-gray-400" />
                     </button>
                     <button
                       onClick={() => handleShare('linkedin')}
-                      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-800 bg-gray-800 transition-colors hover:bg-gray-700"
+                      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30"
                       aria-label="Share on LinkedIn"
                     >
                       <Linkedin className="h-4 w-4 text-gray-400" />
                     </button>
                     <button
                       onClick={() => handleShare('copy')}
-                      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-800 bg-gray-800 transition-colors hover:bg-gray-700"
+                      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-800/50 bg-gray-900/30"
                       aria-label="Copy link"
                     >
                       <Link2 className="h-4 w-4 text-gray-400" />
                     </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Description */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                <p className="text-base leading-relaxed text-gray-300">
+              <div>
+                <p className="text-sm leading-relaxed text-gray-300 sm:text-base">
                   {job.fullDescription}
                 </p>
-              </motion.div>
+              </div>
 
               {/* Requirements */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-              >
-                <h2 className="mb-4 text-xl font-semibold text-white">
+              <div>
+                <h2 className="mb-3 text-lg font-semibold text-white sm:text-xl">
                   Requirements
                 </h2>
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {job.requirements.map((req, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+                    <div key={index} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#43b14b]" />
                       <span className="text-sm leading-relaxed text-gray-300">
                         {req.text}
                       </span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Key Responsibilities */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-              >
-                <h2 className="mb-4 text-xl font-semibold text-white">
+              <div>
+                <h2 className="mb-3 text-lg font-semibold text-white sm:text-xl">
                   Key Responsibilities
                 </h2>
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {job.responsibilities.map((resp, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+                    <div key={index} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#43b14b]" />
                       <span className="text-sm leading-relaxed text-gray-300">
                         {resp.text}
                       </span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Benefits */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-              >
-                <h2 className="mb-4 text-xl font-semibold text-white">
+              <div>
+                <h2 className="mb-3 text-lg font-semibold text-white sm:text-xl">
                   Benefits
                 </h2>
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {job.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+                    <div key={index} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#43b14b]" />
                       <span className="text-sm leading-relaxed text-gray-300">
                         {benefit.text}
                       </span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Contact Email */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.5 }}
-                className="border-t border-gray-800 pt-4"
-              >
+              <div className="pt-4">
                 <p className="text-sm text-gray-400">
                   Interested people can forward their resume to{' '}
                   <a
                     href={`mailto:${job.contactEmail}`}
-                    className="text-blue-400 hover:text-blue-300"
+                    className="text-[#43b14b] hover:text-[#4ade80]"
                   >
                     {job.contactEmail}
                   </a>
                 </p>
-              </motion.div>
+              </div>
             </div>
 
             {/* Right Column - Application Form */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="h-fit lg:sticky lg:top-24"
-            >
-              <div className="rounded-lg border border-gray-800 bg-gray-900 p-6">
-                <h2 className="mb-6 text-lg font-semibold text-white">
+            <div className="h-fit lg:sticky lg:top-20">
+              <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 sm:p-5">
+                <h2 className="mb-4 text-base font-semibold text-white sm:text-lg">
                   Apply for this Job
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                {submitSuccess && (
+                  <div className="mb-3 rounded-lg border border-[#43b14b]/30 bg-[#43b14b]/10 px-3 py-2 text-xs text-[#43b14b] flex items-center gap-2 sm:text-sm">
+                    <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    Application submitted successfully!
+                  </div>
+                )}
+                {submitError && (
+                  <div className="mb-3 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-300 sm:text-sm">
+                    {submitError}
+                  </div>
+                )}
+                <form onSubmit={handleSubmit} className="space-y-3">
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-gray-400">
                       Name
                     </label>
                     <input
@@ -282,11 +321,11 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                       onChange={(e) =>
                         handleInputChange('name', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-3 py-2 text-sm text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-gray-400">
                       Email
                     </label>
                     <input
@@ -298,11 +337,11 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                       onChange={(e) =>
                         handleInputChange('email', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-3 py-2 text-sm text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-gray-400">
                       Phone Number
                     </label>
                     <input
@@ -314,11 +353,11 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                       onChange={(e) =>
                         handleInputChange('phone', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-3 py-2 text-sm text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-gray-400">
                       Address
                     </label>
                     <input
@@ -329,26 +368,26 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                       onChange={(e) =>
                         handleInputChange('address', e.target.value)
                       }
-                      className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-3 py-2 text-sm text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-gray-400">
                       Cover Letter
                     </label>
                     <textarea
                       name="coverLetter"
                       placeholder="Message"
-                      rows={4}
+                      rows={3}
                       value={formData.coverLetter}
                       onChange={(e) =>
                         handleInputChange('coverLetter', e.target.value)
                       }
-                      className="w-full resize-none rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                      className="w-full resize-none rounded-md border border-gray-800/50 bg-gray-900/30 px-3 py-2 text-sm text-white placeholder-gray-500 focus:border-[#43b14b] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-400">
+                    <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-gray-400">
                       Please Attach Your CV Here
                     </label>
                     <input
@@ -358,42 +397,44 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                       onChange={(e) =>
                         handleInputChange('cv', e.target.files?.[0] || null)
                       }
-                      className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white file:mr-4 file:rounded-md file:border-0 file:bg-blue-600 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-white hover:file:bg-blue-700 focus:border-blue-500 focus:outline-none"
+                      className="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white file:mr-3 file:rounded-md file:border-0 file:bg-[#43b14b] file:px-2.5 file:py-1 file:text-xs file:font-medium file:text-white hover:file:bg-[#3a9a41] focus:border-[#43b14b] focus:outline-none"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                    disabled={submitting}
+                    className="w-full rounded-md bg-[#43b14b] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#3a9a41] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    Apply Now
+                    {submitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      'Apply Now'
+                    )}
                   </button>
                 </form>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-gray-800 py-16 sm:py-20 lg:py-24">
+      <section className="py-10 sm:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-3xl text-center"
-          >
-            <h2 className="mb-4 text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="mb-3 text-xl font-semibold text-white sm:text-2xl lg:text-3xl">
               Let&apos;s connect and turn your vision into reality.
             </h2>
-            <p className="mb-6 text-base text-gray-400 sm:text-lg">
+            <p className="mb-5 text-sm text-gray-400 sm:text-base">
               We are available from 9:00 AM to 6:00 PM, Monday to Friday.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href="tel:+9779709098343"
-                className="rounded-md bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                className="rounded-md bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Reach out now! +977 9709098343
               </a>
@@ -405,7 +446,7 @@ export default function JobDetailClient({ job }: JobDetailClientProps) {
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

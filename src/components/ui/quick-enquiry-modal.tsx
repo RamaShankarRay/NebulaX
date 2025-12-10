@@ -75,7 +75,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[200] bg-[#1b1b1b]/60 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -113,7 +113,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                       <label className="mb-2 block text-xs font-medium text-gray-400">
-                        Name <span className="text-blue-400">*</span>
+                        Name <span className="text-[#43b14b]">*</span>
                       </label>
                       <input
                         type="text"
@@ -123,14 +123,14 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         onChange={(e) =>
                           handleInputChange('name', e.target.value)
                         }
-                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                         placeholder="Your full name"
                       />
                     </div>
 
                     <div>
                       <label className="mb-2 block text-xs font-medium text-gray-400">
-                        Email <span className="text-blue-400">*</span>
+                        Email <span className="text-[#43b14b]">*</span>
                       </label>
                       <input
                         type="email"
@@ -140,7 +140,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         onChange={(e) =>
                           handleInputChange('email', e.target.value)
                         }
-                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                         placeholder="your.email@example.com"
                       />
                     </div>
@@ -156,7 +156,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         onChange={(e) =>
                           handleInputChange('phoneNumber', e.target.value)
                         }
-                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                         placeholder="+977 98XXXXXXXX"
                       />
                     </div>
@@ -171,7 +171,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         onChange={(e) =>
                           handleInputChange('service', e.target.value)
                         }
-                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white transition-colors focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white transition-colors focus:border-[#43b14b] focus:outline-none"
                       >
                         <option value="">---Service---</option>
                         {services.map((service) => (
@@ -184,7 +184,8 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
 
                     <div>
                       <label className="mb-2 block text-xs font-medium text-gray-400">
-                        Write a Message <span className="text-blue-400">*</span>
+                        Write a Message{' '}
+                        <span className="text-[#43b14b]">*</span>
                       </label>
                       <textarea
                         name="message"
@@ -194,14 +195,14 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         onChange={(e) =>
                           handleInputChange('message', e.target.value)
                         }
-                        className="w-full resize-none rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none"
+                        className="w-full resize-none rounded-md border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                         placeholder="Tell us about your project..."
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                      className="w-full rounded-md bg-[#43b14b] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#3a9a41]"
                     >
                       Submit
                     </button>
@@ -223,8 +224,8 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
 
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-600/20">
-                        <Phone className="h-6 w-6 text-blue-400" />
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#43b14b]/20">
+                        <Phone className="h-6 w-6 text-[#43b14b]" />
                       </div>
                       <div>
                         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
@@ -232,7 +233,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         </p>
                         <a
                           href="tel:+9779709098343"
-                          className="text-base text-white transition-colors hover:text-blue-400"
+                          className="text-base text-white transition-colors hover:text-[#43b14b]"
                         >
                           +977 9709098343
                         </a>
@@ -240,8 +241,8 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                     </div>
 
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-600/20">
-                        <Mail className="h-6 w-6 text-blue-400" />
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#43b14b]/20">
+                        <Mail className="h-6 w-6 text-[#43b14b]" />
                       </div>
                       <div>
                         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
@@ -249,7 +250,7 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                         </p>
                         <a
                           href="mailto:sales@nebulax.com"
-                          className="text-base text-white transition-colors hover:text-blue-400"
+                          className="text-base text-white transition-colors hover:text-[#43b14b]"
                         >
                           sales@nebulax.com
                         </a>
@@ -257,8 +258,8 @@ export function QuickEnquiryModal({ isOpen, onClose }: QuickEnquiryModalProps) {
                     </div>
 
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-600/20">
-                        <MapPin className="h-6 w-6 text-blue-400" />
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#43b14b]/20">
+                        <MapPin className="h-6 w-6 text-[#43b14b]" />
                       </div>
                       <div>
                         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">

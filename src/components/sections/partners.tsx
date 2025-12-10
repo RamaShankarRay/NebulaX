@@ -68,24 +68,24 @@ export function Partners() {
   return (
     <section
       id="partners"
-      className="relative overflow-hidden bg-black py-12 sm:py-16 lg:py-20"
+      className="relative overflow-hidden bg-[#1b1b1b] py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Centered */}
         <div className="mb-8 text-center sm:mb-10 lg:mb-12">
           {/* Our Valued Partners Label with lines */}
           <div className="mb-3 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-blue-400" />
+            <div className="h-px w-12 bg-[#43b14b]" />
             <p className="text-sm font-medium uppercase tracking-wider text-gray-400">
               Our Valued Partners
             </p>
-            <div className="h-px w-12 bg-blue-400" />
+            <div className="h-px w-12 bg-[#43b14b]" />
           </div>
 
           {/* Main Title */}
           <h2 className="mb-3 text-2xl font-semibold sm:text-3xl lg:text-4xl">
             <span className="text-white">Trusted By </span>
-            <span className="text-blue-400">Top-Rated Companies</span>
+            <span className="text-[#43b14b]">Top-Rated Companies</span>
           </h2>
 
           {/* Description */}
@@ -173,9 +173,9 @@ export function Partners() {
 
         {/* Scroll Indicator (Optional) */}
         <div className="mt-6 flex items-center justify-center gap-2">
-          <div className="h-1 w-1 animate-pulse rounded-full bg-blue-400/50" />
+          <div className="h-1 w-1 animate-pulse rounded-full bg-[#43b14b]/50" />
           <p className="text-xs text-gray-500">Scroll to explore</p>
-          <div className="h-1 w-1 animate-pulse rounded-full bg-blue-400/50" />
+          <div className="h-1 w-1 animate-pulse rounded-full bg-[#43b14b]/50" />
         </div>
       </div>
 

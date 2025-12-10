@@ -1,23 +1,25 @@
-import { Metadata } from 'next';
+import { generateMetadata as genMeta } from '@/lib/seo';
+import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'About Us - NebulaX Research & Technologies Pvt. Ltd.',
+export const metadata: Metadata = genMeta({
+  title: 'About Us - Who We Are',
   description:
-    "Learn about NebulaX Research & Technologies Pvt. Ltd., Nepal's premier technology company. Discover our mission, vision, values, and journey of transforming digital visions into reality.",
+    'Learn about NebulaX Research & Technologies - a leading IT company in Nepal providing innovative software solutions, web development, and digital services.',
   keywords: [
     'about',
     'company',
+    'IT company Nepal',
+    'software company',
     'technology',
-    'Nepal',
-    'IT solutions',
-    'digital transformation',
   ],
-};
+  url: '/about',
+  type: 'website',
+});
 
 export default function AboutLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

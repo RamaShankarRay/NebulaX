@@ -33,9 +33,9 @@ export default function PricingDetailClient({
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
-      <section className="relative border-b border-gray-800 pb-16 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40">
+      <section className="relative pb-16 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,7 @@ export default function PricingDetailClient({
             <div className="mt-8">
               <button
                 onClick={openModal}
-                className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                className="inline-flex items-center gap-2 rounded-md bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Let&apos;s start conversation
                 <ArrowRight className="h-4 w-4" />
@@ -66,7 +66,7 @@ export default function PricingDetailClient({
       </section>
 
       {/* Pricing Tiers Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,14 +90,14 @@ export default function PricingDetailClient({
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className={`relative flex flex-col overflow-hidden rounded-lg border ${
                   tier.badge
-                    ? 'border-blue-500 bg-gray-900'
+                    ? 'border-[#43b14b] bg-gray-900'
                     : 'border-gray-800 bg-gray-900/50'
                 }`}
               >
                 {/* Badge */}
                 {tier.badge && (
                   <div className="absolute right-4 top-4">
-                    <div className="flex items-center gap-1 rounded-md bg-blue-600 px-2 py-1 text-xs font-medium text-white">
+                    <div className="flex items-center gap-1 rounded-md bg-[#43b14b] px-2 py-1 text-xs font-medium text-white">
                       <Star className="h-3 w-3 fill-current" />
                       <span>{tier.badge}</span>
                     </div>
@@ -110,7 +110,7 @@ export default function PricingDetailClient({
                     {tier.name}
                   </h3>
                   <div className="mb-2">
-                    <span className="text-2xl font-semibold text-blue-400 sm:text-3xl">
+                    <span className="text-2xl font-semibold text-[#43b14b] sm:text-3xl">
                       {tier.price}
                     </span>
                     {tier.priceNote && (
@@ -127,7 +127,7 @@ export default function PricingDetailClient({
                   <ul className="space-y-2">
                     {tier.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
-                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#43b14b]" />
                         <span className="text-sm leading-relaxed text-gray-300">
                           {feature}
                         </span>
@@ -135,7 +135,7 @@ export default function PricingDetailClient({
                     ))}
                     {tier.hasProjectManager && (
                       <li className="mt-2 flex items-start gap-2 border-t border-gray-800 pt-2">
-                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#43b14b]" />
                         <span className="text-sm font-medium text-white">
                           Dedicated Project Manager
                         </span>
@@ -149,7 +149,7 @@ export default function PricingDetailClient({
                   {tier.ctaLink ? (
                     <Link
                       href={tier.ctaLink}
-                      className="block w-full rounded-md bg-blue-600 px-4 py-3 text-center font-medium text-white transition-colors hover:bg-blue-700"
+                      className="block w-full rounded-md bg-[#43b14b] px-4 py-3 text-center font-medium text-white transition-colors hover:bg-[#3a9a41]"
                     >
                       {tier.ctaText}
                     </Link>
@@ -178,7 +178,7 @@ export default function PricingDetailClient({
       </section>
 
       {/* Custom Package Form Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -196,12 +196,15 @@ export default function PricingDetailClient({
               </p>
             </div>
 
-            <div className="rounded-lg border border-gray-800 bg-gray-900 p-6 sm:p-8">
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 sm:p-8">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {pricing.customPackageForm.fields.map((field, index) => (
                   <div key={index}>
-                    <label className="mb-2 block text-sm font-medium text-white">
-                      {field.label}
+                    <label className="mb-2 block text-xs font-medium text-gray-400">
+                      {field.label.split('*')[0]}
+                      {field.required && (
+                        <span className="text-[#43b14b]"> *</span>
+                      )}
                     </label>
                     {field.type === 'select' ? (
                       <select
@@ -211,11 +214,26 @@ export default function PricingDetailClient({
                         onChange={(e) =>
                           handleInputChange(field.name, e.target.value)
                         }
-                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white transition-colors focus:border-[#43b14b] focus:outline-none"
+                        style={{
+                          backgroundColor: 'rgba(17, 24, 39, 0.3)',
+                        }}
                       >
-                        <option value="">{field.placeholder}</option>
+                        <option
+                          value=""
+                          style={{ backgroundColor: '#1b1b1b', color: 'white' }}
+                        >
+                          {field.placeholder}
+                        </option>
                         {field.options?.map((option, optIndex) => (
-                          <option key={optIndex} value={option}>
+                          <option
+                            key={optIndex}
+                            value={option}
+                            style={{
+                              backgroundColor: '#1b1b1b',
+                              color: 'white',
+                            }}
+                          >
                             {option}
                           </option>
                         ))}
@@ -230,14 +248,14 @@ export default function PricingDetailClient({
                         onChange={(e) =>
                           handleInputChange(field.name, e.target.value)
                         }
-                        className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-800/50 bg-gray-900/30 px-4 py-2.5 text-sm text-white placeholder-gray-500 transition-colors focus:border-[#43b14b] focus:outline-none"
                       />
                     )}
                   </div>
                 ))}
                 <button
                   type="submit"
-                  className="w-full rounded-md bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                  className="w-full rounded-md bg-[#43b14b] px-8 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#3a9a41] sm:w-auto"
                 >
                   Submit
                 </button>
@@ -248,7 +266,7 @@ export default function PricingDetailClient({
       </section>
 
       {/* FAQs Section */}
-      <section className="border-b border-gray-800 py-12 sm:py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -273,11 +291,11 @@ export default function PricingDetailClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="overflow-hidden rounded-lg border border-gray-800 bg-gray-900/50"
+                className="overflow-hidden rounded-lg border border-gray-800/50 bg-gray-900/30"
               >
                 <button
                   onClick={() => handleFaqToggle(index)}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-800/50"
+                  className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors"
                 >
                   <span className="pr-4 text-base font-medium text-white">
                     {faq.question}
@@ -289,7 +307,7 @@ export default function PricingDetailClient({
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="border-t border-gray-800 px-6 py-4">
+                  <div className="px-6 pb-4">
                     <p className="text-sm leading-relaxed text-gray-400">
                       {faq.answer}
                     </p>
@@ -320,7 +338,7 @@ export default function PricingDetailClient({
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href="tel:+9779709098343"
-                className="rounded-md bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                className="rounded-md bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Reach out now! +977 9709098343
               </a>

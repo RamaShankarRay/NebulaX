@@ -46,29 +46,29 @@ export function HowWeWork() {
   return (
     <section
       id="how-we-work"
-      className="relative bg-black py-12 sm:py-16 lg:py-20"
+      className="relative bg-[#1b1b1b] py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Centered */}
         <div className="mb-10 text-center sm:mb-12 lg:mb-16">
           {/* How We Work Label with lines */}
           <div className="mb-4 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-blue-400" />
+            <div className="h-px w-12 bg-[#43b14b]" />
             <p className="text-sm font-medium uppercase tracking-wider text-gray-400">
               How We Work
             </p>
-            <div className="h-px w-12 bg-blue-400" />
+            <div className="h-px w-12 bg-[#43b14b]" />
           </div>
 
           {/* Main Title */}
           <h2 className="mb-6 text-2xl font-semibold sm:text-3xl lg:text-4xl">
             <span className="text-white">Enjoy Seamless Service With </span>
-            <span className="text-blue-400">Our Easy Steps!</span>
+            <span className="text-[#43b14b]">Our Easy Steps!</span>
           </h2>
 
           {/* Workflow Description with See All on same line */}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="inline-flex items-center rounded-lg border border-blue-500/30 bg-blue-500/5 px-4 py-2">
+            <div className="inline-flex items-center rounded-lg border border-[#43b14b]/30 bg-[#43b14b]/5 px-4 py-2">
               <p className="text-sm text-gray-300 sm:text-base">
                 Efficient workflow from requirements gathering to support and
                 maintenance
@@ -76,10 +76,10 @@ export function HowWeWork() {
             </div>
             <Link
               href="#how-we-work"
-              className="group flex shrink-0 items-center gap-2 text-gray-400 transition-colors hover:text-blue-400"
+              className="group flex shrink-0 items-center gap-2 text-gray-400 transition-colors hover:text-[#43b14b]"
             >
-              <span className="h-px w-8 bg-gray-700 transition-colors group-hover:bg-blue-400" />
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+              <span className="h-px w-8 bg-gray-700 transition-colors group-hover:bg-[#43b14b]" />
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-base font-medium sm:text-lg">See All</span>
             </Link>
           </div>

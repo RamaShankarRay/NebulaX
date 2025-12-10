@@ -25,7 +25,7 @@ export function SectionHeader({
       className={`mb-12 text-center lg:mb-16 ${className}`}
     >
       {label && (
-        <p className="mb-3 text-sm font-medium uppercase tracking-wider text-blue-400">
+        <p className="mb-3 text-sm font-medium uppercase tracking-wider text-[#43b14b]">
           {label}
         </p>
       )}

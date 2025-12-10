@@ -16,16 +16,16 @@ export function WaterWheel() {
     <div className="relative flex h-full min-h-[400px] w-full items-center justify-center overflow-visible sm:min-h-[500px] md:min-h-[600px]">
       {/* Subtle gradient background circle */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="h-[90%] w-[90%] rounded-full bg-gradient-to-br from-blue-950/20 via-transparent to-gray-950/20 blur-3xl"></div>
+        <div className="h-[90%] w-[90%] rounded-full bg-gradient-to-br from-[#153a19]/20 via-transparent to-gray-950/20 blur-3xl"></div>
       </div>
 
       {/* Main Wheel Container */}
       <div className="relative h-64 w-64 overflow-visible sm:h-80 sm:w-80 md:h-96 md:w-96 lg:h-[420px] lg:w-[420px]">
         {/* Outer glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/10 via-transparent to-blue-800/10 blur-xl"></div>
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#43b14b]/10 via-transparent to-[#3a9a41]/10 blur-xl"></div>
 
         {/* Wheel Shadow */}
-        <div className="absolute inset-0 translate-y-4 transform rounded-full bg-black/30 blur-2xl"></div>
+        <div className="absolute inset-0 translate-y-4 transform rounded-full bg-[#1b1b1b]/30 blur-2xl"></div>
 
         {/* Rotating Wheel */}
         <div className="animate-rotate-wheel relative h-full w-full overflow-visible rounded-full">
@@ -33,7 +33,7 @@ export function WaterWheel() {
           <div className="absolute left-1/2 top-1/2 z-20 h-16 w-16 -translate-x-1/2 -translate-y-1/2 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28">
             <div className="relative h-full w-full">
               {/* Hub shadow */}
-              <div className="absolute inset-0 rounded-full bg-black/40 blur-md"></div>
+              <div className="absolute inset-0 rounded-full bg-[#1b1b1b]/40 blur-md"></div>
               {/* Hub main */}
               <div className="absolute inset-0 rounded-full border-4 border-amber-600/50 bg-gradient-to-br from-amber-800 via-amber-700 to-amber-900 shadow-2xl">
                 <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-amber-600/30 to-transparent"></div>
@@ -85,7 +85,7 @@ export function WaterWheel() {
                 >
                   <div className="relative">
                     {/* Bucket shadow */}
-                    <div className="absolute inset-0 translate-x-0.5 translate-y-1 transform rounded-lg bg-black/30 blur-md"></div>
+                    <div className="absolute inset-0 translate-x-0.5 translate-y-1 transform rounded-lg bg-[#1b1b1b]/30 blur-md"></div>
 
                     {/* Bucket container */}
                     <div className="relative rounded-lg border-2 border-amber-600/50 bg-gradient-to-br from-amber-800 via-amber-700 to-amber-900 px-2.5 py-2 shadow-xl sm:px-3.5 sm:py-2.5 md:px-4 md:py-3">

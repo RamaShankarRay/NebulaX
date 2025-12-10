@@ -4,13 +4,23 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/constants';
-import { ArrowRight } from 'lucide-react';
+import { StructuredData } from '@/components/seo/structured-data';
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-black">
+    <>
+      <StructuredData
+        config={{
+          title: 'Our Services - Digital Solutions',
+          description:
+            'Comprehensive digital solutions including web development, mobile app development, SEO services, graphic design, and more.',
+          url: '/services',
+          type: 'website',
+        }}
+      />
+      <div className="min-h-screen bg-[#1b1b1b]">
       {/* Hero Section */}
-      <section className="relative border-b border-gray-800 pb-16 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40">
+      <section className="relative pb-16 pt-24 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -19,18 +29,18 @@ export default function ServicesPage() {
             className="mx-auto max-w-4xl text-center"
           >
             <div className="mb-6 flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-blue-400" />
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
+              <div className="h-px w-12 bg-[#43b14b]" />
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
               <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
                 Our Services
               </span>
-              <span className="h-2 w-2 rounded-full bg-blue-400" />
-              <div className="h-px w-12 bg-blue-400" />
+              <span className="h-2 w-2 rounded-full bg-[#43b14b]" />
+              <div className="h-px w-12 bg-[#43b14b]" />
             </div>
             <h1 className="mb-6 text-4xl font-normal leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               One Solution For All Your
               <br />
-              <span className="text-blue-400">Digital Needs</span>
+              <span className="text-[#43b14b]">Digital Needs</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-400 sm:text-xl">
               Comprehensive digital solutions designed to elevate your business
@@ -43,7 +53,7 @@ export default function ServicesPage() {
       {/* Services Grid */}
       <section className="py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
             {SERVICES.map((service, index) => {
               const Icon = service.icon;
               // Use the slug from the service object, fallback to website-development if not available
@@ -56,19 +66,20 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="h-full"
                 >
                   <Link
                     href={`/services/${finalSlug}`}
                     className="group block h-full"
                   >
-                    <div className="flex h-full flex-col overflow-hidden rounded-lg border border-gray-800 bg-gray-900/50 transition-all duration-200 hover:border-gray-700 hover:bg-gray-900">
-                      {/* Image Container */}
-                      <div className="relative h-48 w-full overflow-hidden bg-gray-800">
+                    <article className="flex h-full flex-col bg-transparent">
+                      {/* Image Container - Aspect Ratio Match Blogs */}
+                      <div className="relative mb-4 aspect-[16/10] w-full overflow-hidden rounded-lg bg-gray-900">
                         <Image
                           src={service.image}
                           alt={service.title}
                           fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="object-cover transition-opacity duration-200 group-hover:opacity-90"
                           unoptimized
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
@@ -83,25 +94,29 @@ export default function ServicesPage() {
                           }}
                         />
                         {/* Icon Fallback */}
-                        <div className="icon-fallback absolute inset-0 hidden items-center justify-center bg-blue-600/10">
-                          <Icon className="h-12 w-12 text-blue-400" />
+                        <div className="icon-fallback absolute inset-0 hidden items-center justify-center bg-[#43b14b]/10">
+                          <Icon className="h-12 w-12 text-[#43b14b]" />
                         </div>
                       </div>
 
-                      {/* Content */}
-                      <div className="flex flex-1 flex-col p-6">
-                        <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-blue-400">
+                      {/* Content Section - Minimal & Clean */}
+                      <div className="flex flex-1 flex-col">
+                        {/* Title - Clean Typography */}
+                        <h4 className="mb-3 line-clamp-2 text-lg font-medium leading-snug text-white sm:text-xl">
                           {service.title}
-                        </h3>
-                        <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-400">
+                        </h4>
+
+                        {/* Description - Professional */}
+                        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-gray-400">
                           {service.description}
                         </p>
-                        <div className="flex items-center gap-2 text-sm font-medium text-blue-400">
-                          <span>Learn More</span>
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+
+                        {/* Learn More - Minimal Link */}
+                        <div className="mt-auto text-sm font-medium text-[#43b14b]">
+                          Learn more →
                         </div>
                       </div>
-                    </div>
+                    </article>
                   </Link>
                 </motion.div>
               );
@@ -111,7 +126,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-gray-800 py-16 sm:py-20 lg:py-24">
+      <section className="py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,7 +145,7 @@ export default function ServicesPage() {
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/#contact"
-                className="rounded-md bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+                className="rounded-md bg-[#43b14b] px-8 py-3 font-medium text-white transition-colors hover:bg-[#3a9a41]"
               >
                 Get Started
               </Link>
@@ -145,5 +160,6 @@ export default function ServicesPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

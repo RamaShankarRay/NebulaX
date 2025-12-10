@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
+    --background: 0 0% 11%;
     --foreground: 0 0% 100%;
     --card: 0 0% 3%;
     --card-foreground: 0 0% 100%;
     --popover: 0 0% 3%;
     --popover-foreground: 0 0% 100%;
-    --primary: 217 91% 60%;
+    --primary: 125 47% 47%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 8%;
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 8%;
-    --muted-foreground: 215 20% 65%;
+    --muted-foreground: 125 20% 65%;
     --accent: 0 0% 8%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 217 91% 60%;
+    --ring: 125 47% 47%;
     --radius: 0.5rem;
   }
 }
@@ -35,13 +35,13 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    background: #000000;
+    background: #1b1b1b;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    @apply bg-black text-white;
+    @apply bg-[#1b1b1b] text-white;
     font-family:
       var(--font-roboto),
       -apple-system,
@@ -60,7 +60,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    background: #000000;
+    background: #1b1b1b;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -68,7 +68,7 @@
   #__next {
     overflow-x: hidden;
     width: 100%;
-    background: #000000;
+    background: #1b1b1b;
   }
 }
 
@@ -97,23 +97,25 @@ iframe {
   height: auto;
 }
 
-/* Custom scrollbar - Google Material Design style */
+/* Custom scrollbar - Subtle dark theme style */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #1b1b1b;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #424242;
-  border-radius: 4px;
+  background: #2d2d2d;
+  border-radius: 5px;
+  border: 2px solid #1b1b1b;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #616161;
+  background: #3a3a3a;
 }
 
 /* Remove tap highlight on iOS */
@@ -124,23 +126,45 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Dropdown scrollbar - Google Material Design style */
+/* Select dropdown styling - Dark theme */
+select {
+  color: white;
+}
+
+select option {
+  background-color: #1b1b1b !important;
+  color: white !important;
+}
+
+select option:checked {
+  background-color: #43b14b !important;
+  color: white !important;
+}
+
+select option:hover {
+  background-color: #2d2d2d !important;
+  color: white !important;
+}
+
+/* Dropdown scrollbar - Subtle dark theme style */
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #424242;
+  background: #1b1b1b;
   border-radius: 3px;
 }
 
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #2d2d2d;
+  border-radius: 3px;
+  border: 1px solid #1b1b1b;
+}
+
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #525252;
+  background: #3a3a3a;
 }
 
 .scrollbar-thumb-gray-700::-webkit-scrollbar-thumb {
@@ -149,4 +173,34 @@ textarea {
 
 .scrollbar-track-transparent::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* Hide scrollbar for portfolio thumbnails */
+.portfolio-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-thumbnails {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scrollbar styling for media list - Subtle dark theme */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #1b1b1b;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #2d2d2d;
+  border-radius: 3px;
+  border: 1px solid #1b1b1b;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
 }

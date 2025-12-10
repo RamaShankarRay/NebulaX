@@ -11,7 +11,7 @@ import { WhatsAppButton } from '@/components/ui/whatsapp-button';
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#1b1b1b]">
       <Hero />
       <Services />
       <Expertise />
